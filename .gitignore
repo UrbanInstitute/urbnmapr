@@ -31,3 +31,9 @@ vignettes/*.pdf
 # Temporary files created by R markdown
 *.utf8.md
 *.knit.md
+
+# Shapefiles
+shapefiles/zipcode/
+
+# 
+ZIP_COUNTY_122017.xlsx
