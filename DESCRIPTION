@@ -1,16 +1,28 @@
 Package: uimapr
 Type: Package
-Title: Data to create state and county maps with Alaska and Hawaii in R
+Title: State and county shapefiles in tibble format
 Version: 0.0.0.9000
-Author: Kyle Ueyama, Sarah Strochak, and Aaron Williams
-Maintainer: Sarah Strochak <sstrochak@urban.org>
-Description: This package allows for the easy download of state and county shapefiles in a tibble format that is compatible to map with ggplot2. The shapefiles include Alaska and Hawaii, which have been transformed to be displayed with the continental United States.
+Authors@R: c(
+    person('Sarah', 'Strochak', email = 'sstrochak@urban.org', role = c('aut', 'cre')),
+    person('Kyle', 'Ueyama', email = 'kueyama@urban.org', role = 'aut'),
+    person('Aaron', 'Williams', email = 'awilliams@urban.org', role = 'aut')
+    )
+Description: Provides state and county shapefiles in 'tibble' format that is 
+    compatible to map with 'ggplot2'. Shapefiles include Alaska and Hawaii, 
+    transformed to be displayed as insets within the continental United States.
+    Heavily inspired by the fiftystater package <https://cran.r-project.org/package=fiftystater>.
 Depends:
     R (>= 3.4.2)
 Imports:
     tibble
+Suggests:
+    ggplot2,
+    dplyr,
+    magrittr,
+    knitr,
+    rmarkdown
 LazyData: true
 License: What license is it under?
 Encoding: UTF-8
-LazyData: true
 RoxygenNote: 6.0.1
+VignetteBuilder: knitr
