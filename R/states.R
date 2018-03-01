@@ -8,8 +8,8 @@
 #'
 #' @format Data frame with columns
 #' \describe{
-#' \item{long,lat}{Longitude and latitude}
-#' \item{state_name,state_abbv,state_fips}{State name, postal abbreviation, and two-digit FIPS code}
+#' \item{long, lat}{Longitude and latitude}
+#' \item{state_name, state_abbv, state_fips}{State name, postal abbreviation, and two-digit FIPS code}
 #' }
 'states'
 

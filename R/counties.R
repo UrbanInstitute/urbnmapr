@@ -8,9 +8,9 @@
 #'
 #' @format Data frame with columns
 #' \describe{
-#' \item{long,lat}{Longitude and latitude}
-#' \item{county_name, county_fips}{County name and county five-digit FIPS code}
-#' \item{state_name,state_abbv,state_fips}{State name, postal abbreviation, and two-digit FIPS code}
+#' \item{long, lat}{Longitude and latitude}
+#' \item{county_name, county_fips, fips_class}{County name, five-digit FIPS and FIPS class code}
+#' \item{state_name, state_abbv, state_fips}{State name, postal abbreviation, and two-digit FIPS code}
 #' }
 'counties'
 
