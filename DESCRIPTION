@@ -5,12 +5,16 @@ Version: 0.0.0.9000
 Authors@R: c(
     person('Sarah', 'Strochak', email = 'sstrochak@urban.org', role = c('aut', 'cre')),
     person('Kyle', 'Ueyama', email = 'kueyama@urban.org', role = 'aut'),
-    person('Aaron', 'Williams', email = 'awilliams@urban.org', role = 'aut')
+    person('Aaron', 'Williams', email = 'awilliams@urban.org', role = 'aut'),
+    person(family = 'Urban Institute', role = 'cph'),
+    person('William', 'Murphy', role = c('ctb', 'cph'), comment = 'Author of fiftystater package'),
+    person('Barry', 'Rowlingson', role = 'ctb', comment = 'Original author for derived code for fiftystater')
     )
 Description: Provides state and county shapefiles in 'tibble' format that is 
     compatible to map with 'ggplot2'. Shapefiles include Alaska and Hawaii, 
     transformed to be displayed as insets within the continental United States.
-    Heavily inspired by the fiftystater package <https://cran.r-project.org/package=fiftystater>.
+    Heavily inspired by and derived in part from the fiftystater 
+    package <https://cran.r-project.org/package=fiftystater> by William Murphy.
 Depends:
     R (>= 3.4.2)
 Imports:
@@ -21,8 +25,10 @@ Suggests:
     magrittr,
     knitr,
     rmarkdown
+URL: https://github.com/UrbanInstitute/uimapr
+BugReports: https://github.com/UrbanInstitute/uimapr/issues
 LazyData: true
-License: What license is it under?
+License: GPL-3
 Encoding: UTF-8
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr
