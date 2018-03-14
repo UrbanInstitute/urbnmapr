@@ -21,7 +21,7 @@ You can install the latest version of `uimapr` from GitHub:
 
 ``` r
 # install.packages(devtools)
-# devtools::install_github('UrbanInstitute/uimapr')
+devtools::install_github('UrbanInstitute/uimapr')
 ```
 
 Usage

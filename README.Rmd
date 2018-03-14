@@ -25,9 +25,9 @@ contrast, `uimapr`:
 
 You can install the latest version of `uimapr` from GitHub:
 
-```{r installation}
+```{r installation, message=FALSE}
 # install.packages(devtools)
-# devtools::install_github('UrbanInstitute/uimapr')
+devtools::install_github('UrbanInstitute/uimapr')
 ```
 
 ## Usage
