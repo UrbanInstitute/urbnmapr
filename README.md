@@ -3,11 +3,16 @@
 uimapr
 ======
 
-The `uimapr` package provides state and county shapefiles in 'tibble' format that is compatible to map with 'ggplot2'.
+The `uimapr` package provides state and county shapefiles in `tibble` format that is compatible to map with `ggplot2`.
 
 Shapefiles include Alaska and Hawaii, transformed to be displayed as insets within the continental United States.
 
-This package is heavily inspired by and derived in part from the [fiftystater package](https://cran.r-project.org/package=fiftystater) by William Murphy.
+This package is heavily inspired by and derived in part from the [fiftystater package](https://cran.r-project.org/package=fiftystater) by William Murphy. In contrast, `uimapr`:
+
+-   Uses shapefiles from the US Census Bureau
+-   Converts the shapefile data to a `tibble` dataframe
+-   Adds various identifiers for merging
+-   Includes a county-level shapefile
 
 Installation
 ------------
@@ -42,7 +47,7 @@ states %>%
    coord_map(projection = "albers", lat0 = 39, lat1 = 45)
 ```
 
-![](README_files/figure-markdown_github-ascii_identifiers/blank-state-1.png)
+![](README_files/figure-markdown_github/blank-state-1.png)
 
 Merging Data
 ------------
@@ -59,4 +64,4 @@ USArrests %>%
    coord_map(projection = "albers", lat0 = 39, lat1 = 45)
 ```
 
-![](README_files/figure-markdown_github-ascii_identifiers/us-choropleth-1.png)
+![](README_files/figure-markdown_github/us-choropleth-1.png)
