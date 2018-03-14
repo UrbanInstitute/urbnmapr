@@ -69,3 +69,6 @@ USArrests %>%
    coord_map(projection = "albers", lat0 = 39, lat1 = 45)
 ```
 
+## License
+
+Code released under the GNU General Public License v3.0.

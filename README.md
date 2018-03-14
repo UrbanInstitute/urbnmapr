@@ -65,3 +65,8 @@ USArrests %>%
 ```
 
 ![](README_files/figure-markdown_github/us-choropleth-1.png)
+
+License
+-------
+
+Code released under the GNU General Public License v3.0.
