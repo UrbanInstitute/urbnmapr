@@ -18,7 +18,8 @@ Description: Provides state and county shapefiles in 'tibble' format that is
 Depends:
     R (>= 3.4.2)
 Imports:
-    tibble
+    tibble,
+    mapproj
 Suggests:
     ggplot2,
     dplyr,
