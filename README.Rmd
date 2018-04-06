@@ -6,7 +6,7 @@ output: github_document
 
 # uimapr
 
-[![Travis-CI Build Status](https://travis-ci.org/UI-Research/uimapr.svg?branch=master)](https://travis-ci.org/UI-Research/uimapr)
+[![Travis-CI Build Status](https://travis-ci.org/UrbanInstitute/uimapr.svg?branch=master)](https://travis-ci.org/UrbanInstitute/uimapr)
 
 The `uimapr` package provides state and county shapefiles in `tibble` format 
 that is compatible to map with `ggplot2`. 
@@ -27,7 +27,7 @@ contrast, `uimapr`:
 
 You can install the latest version of `uimapr` from GitHub:
 
-```{r installation, message=FALSE}
+```{r installation, message=FALSE, warning=FALSE}
 # install.packages(devtools)
 devtools::install_github('UrbanInstitute/uimapr')
 ```
