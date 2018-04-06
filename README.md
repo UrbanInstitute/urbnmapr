@@ -3,6 +3,8 @@
 uimapr
 ======
 
+[![Travis-CI Build Status](https://travis-ci.org/UI-Research/uimapr.svg?branch=master)](https://travis-ci.org/UI-Research/uimapr)
+
 The `uimapr` package provides state and county shapefiles in `tibble` format that is compatible to map with `ggplot2`.
 
 Shapefiles include Alaska and Hawaii, transformed to be displayed as insets within the continental United States.
@@ -23,6 +25,10 @@ You can install the latest version of `uimapr` from GitHub:
 # install.packages(devtools)
 devtools::install_github('UrbanInstitute/uimapr')
 ```
+
+    ## Warning in utils::install.packages(pkgs, repos = repos, type = type,
+    ## dependencies = dependencies, : 'lib = "C:/Program Files/R/R-3.4.3/library"'
+    ## is not writable
 
 Usage
 -----
