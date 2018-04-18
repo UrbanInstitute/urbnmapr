@@ -14,7 +14,7 @@
 #' \item{horate}{Homeownership rate}
 #' \item{medhhincome}{Median household income}
 #' }
-'counties'
+'countydata'
 
 #' @importFrom tibble tibble
 NULL
