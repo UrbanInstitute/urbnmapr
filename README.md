@@ -1,15 +1,15 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-uimapr
-======
+urbnmaps
+========
 
-[![Travis-CI Build Status](https://travis-ci.org/UrbanInstitute/uimapr.svg?branch=master)](https://travis-ci.org/UrbanInstitute/uimapr)
+[![Travis-CI Build Status](https://travis-ci.org/UrbanInstitute/urbnmaps.svg?branch=master)](https://travis-ci.org/UrbanInstitute/urbnmaps)
 
-The `uimapr` package provides state and county shapefiles in `tibble` format that is compatible to map with `ggplot2`.
+The `urbnmaps` package provides state and county shapefiles in `tibble` format that is compatible to map with `ggplot2`.
 
 Shapefiles include Alaska and Hawaii, transformed to be displayed as insets within the continental United States.
 
-This package is heavily inspired by and derived in part from the [fiftystater package](https://cran.r-project.org/package=fiftystater) by William Murphy. In contrast, `uimapr`:
+This package is heavily inspired by and derived in part from the [fiftystater package](https://cran.r-project.org/package=fiftystater) by William Murphy. In contrast, `urbnmaps`:
 
 -   Uses shapefiles from the US Census Bureau
 -   Converts the shapefile data to a `tibble` dataframe
@@ -19,17 +19,17 @@ This package is heavily inspired by and derived in part from the [fiftystater pa
 Installation
 ------------
 
-You can install the latest version of `uimapr` from GitHub:
+You can install the latest version of `urbnmaps` from GitHub:
 
 ``` r
 # install.packages(devtools)
-devtools::install_github("UrbanInstitute/uimapr")
+devtools::install_github("UrbanInstitute/urbnmaps")
 ```
 
 Usage
 -----
 
-`uimapr` contains two `tibble` dataframes:
+`urbnmaps` contains two `tibble` dataframes:
 
 -   `states`
 -   `counties`
@@ -38,7 +38,7 @@ The `states` and `counties` tibbles can be used with `geom_polygon()` and `coord
 
 ``` r
 library(tidyverse)
-library(uimapr)
+library(urbnmaps)
 
 states %>%
   ggplot(aes(long, lat, group = group)) +
@@ -68,7 +68,7 @@ USArrests %>%
   select(state_name, Murder) %>%
   left_join(states, by = "state_name") %>%
   ggplot(aes(long, lat, group = group, fill = Murder)) +
-    geom_polygon(color = "#ffffff") +
+    geom_polygon(color = "#ffffff", size = 0.25) +
     coord_map(projection = "albers", lat0 = 39, lat1 = 45)
 ```
 
@@ -77,16 +77,8 @@ USArrests %>%
 ``` r
 household_data <- left_join(countydata, counties, by = "county_fips")
 
-anti_join(countydata, counties, by = "county_fips")
-```
+mismatches <- anti_join(countydata, counties, by = "county_fips")
 
-    ## # A tibble: 2 x 5
-    ##    year county_fips hhpop horate medhhincome
-    ##   <dbl> <chr>       <dbl>  <dbl>       <dbl>
-    ## 1  2015 02270        2194  0.599       61900
-    ## 2  2015 46113        4721  0.621       46000
-
-``` r
 household_data %>%
   ggplot(aes(long, lat, group = group, fill = medhhincome)) +
     geom_polygon(color = "#ffffff", size = 0.05) +
@@ -98,7 +90,7 @@ household_data %>%
 Styles
 ------
 
-`library(uimapr)` works well with the [Urban Institute `ggplot2` theme.](https://github.com/UrbanInstitute/urban_R_theme)
+`library(urbnmaps)` works well with the [Urban Institute `ggplot2` theme.](https://github.com/UrbanInstitute/urban_R_theme)
 
 ``` r
 source("https://raw.githubusercontent.com/UrbanInstitute/urban_R_theme/urban_R_theme_revamp/urban_theme.R")
