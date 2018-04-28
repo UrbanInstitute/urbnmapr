@@ -70,9 +70,7 @@ USArrests %>%
 
 
 ```{r county}
-household_data <- left_join(countydata, counties, by = "county_fips")
-
-mismatches <- anti_join(countydata, counties, by = "county_fips")
+household_data <- left_join(countydata, counties, by = "county_fips") 
 
 household_data %>%
   ggplot(aes(long, lat, group = group, fill = medhhincome)) +

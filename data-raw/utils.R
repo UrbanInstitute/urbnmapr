@@ -87,6 +87,13 @@ get_county_fips <- function() {
              col_names = c('state_abbv', 'state_fips', 'county_fips', 'county_name', 'fips_class'),
              col_types = 'ccccc') %>%
     mutate(county_fips = paste0(state_fips, county_fips)) %>%
+    # recode county changes - see https://www.census.gov/geo/reference/county-changes.html
+    # Shannon County, SD changed name to Oglala Lakota County effective May 1, 2015
+    mutate(county_name = if_else(county_fips == '46113', 'Oglala Lakota County', county_name)) %>%
+    mutate(county_fips = if_else(county_fips == '46113', '46102', county_fips)) %>%
+    # Wade Hampton Census Area, AK changed name and code to Kusilvak Census Area effective July 1, 2015
+    mutate(county_name = if_else(county_fips == '02270', 'Kusilvak Census Area', county_name)) %>%
+    mutate(county_fips = if_else(county_fips == '02270', '02158', county_fips)) %>%
     # add in state name from state fips file
     left_join(get_state_fips())
 
