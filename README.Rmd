@@ -6,7 +6,7 @@ output: github_document
 
 # urbnmaps
 
-[![Travis-CI Build Status](https://travis-ci.org/UrbanInstitute/urbnmapr.svg?branch=master)](https://travis-ci.org/UrbanInstitute/urbnmaps)
+[![Travis-CI Build Status](https://travis-ci.org/UrbanInstitute/urbnmapr.svg?branch=master)](https://travis-ci.org/UrbanInstitute/urbnmapr)
 
 The `urbnmapr` package provides state and county shapefiles in `tibble` format that is compatible to map with `ggplot2`.
 
