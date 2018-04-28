@@ -1,4 +1,4 @@
-Package: urbnmaps
+Package: urbnmapr
 Type: Package
 Title: State and county shapefiles in tibble format
 Version: 0.0.0.9000
