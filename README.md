@@ -3,13 +3,13 @@
 urbnmaps
 ========
 
-[![Travis-CI Build Status](https://travis-ci.org/UrbanInstitute/urbnmaps.svg?branch=master)](https://travis-ci.org/UrbanInstitute/urbnmaps)
+[![Travis-CI Build Status](https://travis-ci.org/UrbanInstitute/urbnmapr.svg?branch=master)](https://travis-ci.org/UrbanInstitute/urbnmapr)
 
-The `urbnmaps` package provides state and county shapefiles in `tibble` format that is compatible to map with `ggplot2`.
+The `urbnmapr` package provides state and county shapefiles in `tibble` format that is compatible to map with `ggplot2`.
 
 Shapefiles include Alaska and Hawaii, transformed to be displayed as insets within the continental United States.
 
-This package is heavily inspired by and derived in part from the [fiftystater package](https://cran.r-project.org/package=fiftystater) by William Murphy. In contrast, `urbnmaps`:
+This package is heavily inspired by and derived in part from the [fiftystater package](https://cran.r-project.org/package=fiftystater) by William Murphy. In contrast, `urbnmapr`:
 
 -   Uses shapefiles from the US Census Bureau
 -   Converts the shapefile data to a `tibble` dataframe
@@ -19,17 +19,17 @@ This package is heavily inspired by and derived in part from the [fiftystater pa
 Installation
 ------------
 
-You can install the latest version of `urbnmaps` from GitHub:
+You can install the latest version of `urbnmapr` from GitHub:
 
 ``` r
 # install.packages(devtools)
-devtools::install_github("UrbanInstitute/urbnmaps")
+devtools::install_github("UrbanInstitute/urbnmapr")
 ```
 
 Usage
 -----
 
-`urbnmaps` contains two `tibble` dataframes:
+`urbnmapr` contains two `tibble` dataframes:
 
 -   `states`
 -   `counties`
@@ -38,7 +38,7 @@ The `states` and `counties` tibbles can be used with `geom_polygon()` and `coord
 
 ``` r
 library(tidyverse)
-library(urbnmaps)
+library(urbnmapr)
 
 states %>%
   ggplot(aes(long, lat, group = group)) +
@@ -75,9 +75,7 @@ USArrests %>%
 ![](README_files/figure-markdown_github/us-choropleth-1.png)
 
 ``` r
-household_data <- left_join(countydata, counties, by = "county_fips")
-
-mismatches <- anti_join(countydata, counties, by = "county_fips")
+household_data <- left_join(countydata, counties, by = "county_fips") 
 
 household_data %>%
   ggplot(aes(long, lat, group = group, fill = medhhincome)) +
@@ -90,7 +88,7 @@ household_data %>%
 Styles
 ------
 
-`library(urbnmaps)` works well with the [Urban Institute `ggplot2` theme.](https://github.com/UrbanInstitute/urban_R_theme)
+`library(urbnmapr)` works well with the [Urban Institute `ggplot2` theme.](https://github.com/UrbanInstitute/urban_R_theme)
 
 ``` r
 source("https://raw.githubusercontent.com/UrbanInstitute/urban_R_theme/urban_R_theme_revamp/urban_theme.R")
