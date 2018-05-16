@@ -1,6 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-urbnmaps
+urbnmapr
 ========
 
 [![Travis-CI Build Status](https://travis-ci.org/UrbanInstitute/urbnmapr.svg?branch=master)](https://travis-ci.org/UrbanInstitute/urbnmapr)
@@ -22,7 +22,7 @@ Installation
 You can install the latest version of `urbnmapr` from GitHub:
 
 ``` r
-# install.packages(devtools)
+# install.packages("devtools")
 devtools::install_github("UrbanInstitute/urbnmapr")
 ```
 
@@ -63,13 +63,14 @@ Merging Data
 The `states` and `counties` tibbles include various identifiers to simplify merging data. The states `states` tibble contains `state_fips`, `state_abbv`, and `state_name`. The `counties` tibble contains `county_fips`, `state_abbv`, `state_fips`, `county_name`, and `state_name`. Both tibbles can be piped into `ggplot2` to create a choropleth map.
 
 ``` r
-USArrests %>%
-  rownames_to_column("state_name") %>%
-  select(state_name, Murder) %>%
-  left_join(states, by = "state_name") %>%
-  ggplot(aes(long, lat, group = group, fill = Murder)) +
-    geom_polygon(color = "#ffffff", size = 0.25) +
-    coord_map(projection = "albers", lat0 = 39, lat1 = 45)
+state_household_data <- left_join(statedata, states, by = "state_name")
+
+statedata %>% 
+  left_join(states, by = "state_name") %>% 
+  ggplot(mapping = aes(long, lat, group = group, fill = horate)) +
+  geom_polygon(color = "#ffffff", size = .25) +
+  coord_map(projection = "albers", lat0 = 39, lat1 = 45) +
+  labs(fill = "Homeownership rate")
 ```
 
 ![](README_files/figure-markdown_github/us-choropleth-1.png)
@@ -95,18 +96,18 @@ source("https://raw.githubusercontent.com/UrbanInstitute/urban_R_theme/urban_R_t
 ```
 
 ``` r
-USArrests %>%
-  rownames_to_column("state_name") %>%
-  select(state_name, Murder) %>%
-  left_join(states, by = "state_name") %>%
-  ggplot(aes(long, lat, group = group, fill = Murder)) +
-    geom_polygon(color = "#ffffff", size = 0.25) +
-    coord_map(projection = "albers", lat0 = 39, lat1 = 45) +
-    scale_fill_gradientn() +
-    urban_map +
-    theme(legend.position = "right",
+statedata %>% 
+  left_join(states, by = "state_name") %>% 
+  ggplot(mapping = aes(long, lat, group = group, fill = horate)) +
+  geom_polygon(color = "#ffffff", size = .25) +
+  coord_map(projection = "albers", lat0 = 39, lat1 = 45) +
+  scale_fill_gradientn(labels = scales::percent) +
+  urban_map +
+   theme(legend.position = "right",
           legend.direction = "vertical",
-          legend.title = element_text(face = "bold", size = 11))
+          legend.title = element_text(face = "bold", size = 11),
+          legend.key.height = unit(.2, "in")) +
+  labs(fill = "Homeownership rate")
 ```
 
 ![](README_files/figure-markdown_github/theme-state-1.png)
@@ -121,7 +122,9 @@ household_data %>%
     urban_map +
     theme(legend.position = "right",
           legend.direction = "vertical",
-          legend.title = element_text(face = "bold", size = 11))
+          legend.title = element_text(face = "bold", size = 11),
+          legend.key.height = unit(.25, "in")) +
+  labs(fill = "Median household income")
 ```
 
 ![](README_files/figure-markdown_github/theme-counties-1.png)
