@@ -63,8 +63,6 @@ Merging Data
 The `states` and `counties` tibbles include various identifiers to simplify merging data. The states `states` tibble contains `state_fips`, `state_abbv`, and `state_name`. The `counties` tibble contains `county_fips`, `state_abbv`, `state_fips`, `county_name`, and `state_name`. Both tibbles can be piped into `ggplot2` to create a choropleth map.
 
 ``` r
-state_household_data <- left_join(statedata, states, by = "state_name")
-
 statedata %>% 
   left_join(states, by = "state_name") %>% 
   ggplot(mapping = aes(long, lat, group = group, fill = horate)) +
