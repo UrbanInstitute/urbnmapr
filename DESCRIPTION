@@ -19,11 +19,14 @@ Depends:
     R (>= 3.4.0)
 Imports:
     tibble,
-    mapproj
+    mapproj,
+    broom,
+    magrittr,
+    rgdal,
+    sp
 Suggests:
     ggplot2,
     dplyr,
-    magrittr,
     knitr,
     rmarkdown
 URL: https://github.com/UrbanInstitute/urbnmapr
