@@ -6,4 +6,8 @@ cache: packages
 addons:
   apt:
     packages:
-      - libgdal1i
+      - libgdal1-dev
+      - libproj-dev
+      - gdal-bin
+      - proj-bin
+      - libgeos-dev
