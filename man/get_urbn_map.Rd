@@ -4,10 +4,10 @@
 \alias{get_urbn_map}
 \title{Import different maps}
 \usage{
-get_urbn_map(map)
+get_urbn_map(map = "states")
 }
 \arguments{
-\item{map}{Selection of custom map. Current option is \code{"ccdf"}.}
+\item{map}{Selection of custom map. Current options are \code{"states"}, \code{"counties"}, and \code{"ccdf"}.}
 }
 \description{
 \code{get_urbn_map()} loads maps that are different than \code{states} and \code{counties}

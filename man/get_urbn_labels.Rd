@@ -4,10 +4,10 @@
 \alias{get_urbn_labels}
 \title{Import different maps}
 \usage{
-get_urbn_labels(map)
+get_urbn_labels(map = "states")
 }
 \arguments{
-\item{map}{Selection of custom labels. Current option is \code{"ccdf"}.}
+\item{map}{Selection of custom labels. Current options are \code{"states"}, \code{"counties"}, and \code{"ccdf"}.}
 }
 \description{
 \code{get_urbn_labels()} loads labels and coordinates for maps from the \code{get_urbn_map()} functions.
