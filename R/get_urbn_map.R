@@ -13,5 +13,7 @@ get_urbn_map <- function(map = "states") {
     urbnmapr::counties
   } else if (map == "ccdf") {
     rbind(states[!states$state_name %in% c("Alaska", "Hawaii", "District of Columbia"), ], urbnmapr::ccdfmap)
+  } else if (map == "county-territories") {
+  rbind(counties[!counties$state_name %in% c("Alaska", "Hawaii"), ], urbnmapr::county-territories)
   }
 }
