@@ -19,6 +19,9 @@ transform_state <- function(object, rot, scale, shift){
     elide(shift = shift)
 }
 
+# load utility functions
+source('data-raw/utils.R')
+
 # Load shapefiles ---------------------------------------------------------
 
 url_base <- "http://www2.census.gov/geo/tiger/GENZ2016/shp/"
@@ -143,6 +146,7 @@ territories_county <-
   as_tibble() %>%
   # get_county_fips() found in utils.R
   left_join(get_county_fips(), by = "county_fips")
+save(territories_county, file = 'data/county-territories.rda', compress = 'bzip2')
 
 
 
@@ -157,7 +161,7 @@ urbnthemes::set_urban_defaults("print")
 ggplot() +
   geom_polygon(data = x, mapping = aes(x = long, y = lat, group = group),
                fill = "white", color = "black") +
-  urbnthemes::theme_urban_map() +
+  # urbnthemes::theme_urban_map() +
   geom_text(data = territories_labels, mapping = aes(x = long, y = lat,
                                                      label = state_name)) +
   coord_map(projection = "albers", lat0 = 39, lat1 = 45)

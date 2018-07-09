@@ -38,16 +38,70 @@ get_shapefile <- function(year, level, resolution) {
             verbose = F) %>%
     spTransform(CRS("+init=epsg:2163"))
 
-  # transform AK/HI
+  # transform AK
   alaska <- shapes[shapes$STATEFP == "02", ] %>%
     transform_state(-35, 2, c(-2600000, -2300000))
 
   proj4string(alaska) <- proj4string(shapes)
 
+  # transform HI
+
   hawaii <- shapes[shapes$STATEFP == "15", ] %>%
     transform_state(-35, 0.8, c(-1170000, -2363000))
 
   proj4string(hawaii) <- proj4string(shapes)
+
+  # transform Guam
+
+  guam <- shapes[shapes$STATEFP %in% c("66"), ] %>%
+    transform_state(rot = -35, scale = 0.2, shift = c(-180000, -2700000))
+
+  proj4string(guam) <- proj4string(shapes)
+
+
+  # transform Puerto Rico
+
+  puerto_rico <- shapes[shapes$STATEFP %in% c("72"), ] %>%
+    transform_state(rot = 20, scale = .5, shift = c(200000, -2500000))
+
+  proj4string(puerto_rico) <- proj4string(shapes)
+
+
+  # transform American Samoa
+
+  american_samoa <- shapes[shapes$STATEFP %in% c("60"), ] %>%
+    transform_state(rot = 0, scale = 0.1, shift = c(-1250000, -5050000))
+  proj4string(american_samoa) <- proj4string(shapes)
+
+  # treat islands differently
+  as1 <- american_samoa[!american_samoa$NAME %in% c("Rose Island", "Swains Island", "Manu'a"), ] %>%
+    transform_state(rot = 0, scale = 1.2, shift = c(950000, -2350000))
+  proj4string(as1) <- proj4string(shapes)
+
+  as2 <- american_samoa[american_samoa$NAME %in% c("Manu'a"), ] %>%
+    transform_state(rot = 0, scale = 1.2, shift = c(1450000, -2800000))
+  proj4string(as2) <- proj4string(shapes)
+
+  american_samoa <- rbind(as1, as2) %>%
+    # angle and size need to be slightly adjusted
+    transform_state(rot = 15, scale = 1, shift = c(1000000,-3000000))
+  proj4string(american_samoa) <- proj4string(shapes)
+
+  # transform US Virgin Islands
+
+  virgin_islands <- shapes[shapes$STATEFP %in% c("78"), ] %>%
+    transform_state(rot = 0, scale = 0.2, shift = c(1550000, -2700000))
+
+  proj4string(virgin_islands) <- proj4string(shapes)
+
+
+  # transform Mariana Islands
+
+  mariana_islands <- shapes[shapes$STATEFP %in% c("69"), ] %>%
+    transform_state(rot = -35, scale = 0.3, shift = c(2150000, -2450000))
+
+  proj4string(mariana_islands) <- proj4string(shapes)
+
 
   # recombine shapefile
   exclude <- c("02", "15", "60", "66", "69", "72", "78")
@@ -80,7 +134,7 @@ get_state_fips <- function() {
 
 # download and clean county fips data from census
 get_county_fips <- function() {
-  url <- 'https://www2.census.gov/geo/docs/reference/codes/files/national_county.txt'
+  url <- 'https://www2.census.gov/geo/docs/reference/codes/national_county.txt'
 
   county_fips <-
     read_csv(url,
