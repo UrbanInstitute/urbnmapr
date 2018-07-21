@@ -12,8 +12,21 @@ get_urbn_map <- function(map = "states") {
   } else if (map == "counties") {
     urbnmapr::counties
   } else if (map == "ccdf") {
-    rbind(states[!states$state_name %in% c("Alaska", "Hawaii", "District of Columbia"), ], urbnmapr::ccdfmap)
+    rbind(
+      urbnmapr::states[!urbnmapr::states$state_name %in%
+                         c("Alaska", "Hawaii", "District of Columbia"), ],
+      ccdf
+      )
   } else if (map == "territories_counties") {
-    rbind(counties[!counties$state_name %in% c("Alaska", "Hawaii"), ], urbnmapr::territories_counties)
+    rbind(
+      urbnmapr::counties[!urbnmapr::counties$state_name %in%
+                           c("Alaska", "Hawaii"), ],
+      territories_counties
+      )
+  } else {
+    stop("Invalid 'map' argument. Valid maps are: ",
+         "states, counties, ccdf, and territories_counties.",
+         call. = FALSE
+         )
   }
 }
