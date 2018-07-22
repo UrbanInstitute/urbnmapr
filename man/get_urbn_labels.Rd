@@ -7,7 +7,7 @@
 get_urbn_labels(map = "states")
 }
 \arguments{
-\item{map}{Selection of custom labels. Current options are \code{"states"}, \code{"counties"}, \code{"ccdf"}, and \code{"territories"}.}
+\item{map}{Selection of custom labels. Current options are \code{"states"}, \code{"counties"}, \code{"ccdf"}, and \code{"territories_counties"}.}
 }
 \description{
 \code{get_urbn_labels()} loads labels and coordinates for maps from the \code{get_urbn_map()} functions.
