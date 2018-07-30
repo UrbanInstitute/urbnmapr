@@ -85,23 +85,12 @@ household_data %>%
 
 ## Labels
 
-Like the map data, there are two methods for accessing map labels in `urbnmapr`. First, `urbnmapr` contains two `tibble` data frames, `states_labels` and `counties_labels`, for easily labeling the corresponding maps for `states` and `counties`. 
+The function `get_urbn_labels()` accesses additional labels including "ccdf", which includes elided territories roughly positioned in the direction of their true location, and "territories_counties", which includes territories below the continuous 48 states. 
 
-```{r blank-states-labels}
+```{r blank-ccdf-labels}
 library(tidyverse)
 library(urbnmapr)
 
-states %>%
-  ggplot() +
-    geom_polygon(aes(long, lat, group = group), 
-                 fill = "grey", color = "#ffffff", size = 0.25) +
-    geom_text(data = states_labels, aes(long, lat, label = state_abbv), size = 3) +
-    coord_map(projection = "albers", lat0 = 39, lat1 = 45)
-```
-
-Second, the function `get_urbn_labels()` accesses additional labels including "ccdf", which includes elided territories roughly positioned in the direction of their true location, and "territories_counties", which includes territories below the continuous 48 states. 
-
-```{r blank-ccdf-labels}
 ccdf <- get_urbn_map(map = "ccdf")
 ccdf_labels <- get_urbn_labels(map = "ccdf")
 

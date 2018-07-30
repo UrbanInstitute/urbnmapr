@@ -21,9 +21,9 @@ Imports:
     tibble,
     mapproj
 Suggests:
-    ggplot2,
-    dplyr,
-    magrittr,
+    tidyverse,
+    urbnthemes,
+    scales,
     knitr,
     rmarkdown
 URL: https://github.com/UrbanInstitute/urbnmapr
