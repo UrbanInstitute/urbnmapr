@@ -20,33 +20,30 @@ transform_state <- function(object, rot, scale, shift) {
 
 # load shapefile; if it doesn't exist, download
 
-#' @export
 load_shapefile <- function(year = 2017, level, resolution = "5m") {
   datapath <- user_data_dir(appname = "urbnmapr", appauthor = "UrbanInstitute")
   filepath <- paste(datapath, sprintf("%s_%i_%s.rda", level, year, resolution))
-  if (!dir.exists(datapath)) dir.create(datapath, recursive = TRUE)
-  if (!file.exists(filepath)) {
+  if (!file.exists(filepath, sep = "/")){ 
     df <- get_shapefile(year, level, resolution) %>%
       tidy(region = "GEOID") %>%
       # will this work for anything but cd? (next five lines)
        rename(cd_fips = id) %>%
-      mutate(state_fips = substr(cd_fips, 1, 2)) %>%
+      mutate(state_fips = substr(cd_fips, 1, 2)) %>% 
       as_tibble() %>%
       left_join(get_state_fips(), by = "state_fips") %>%
       filter(!state_fips %in% c("60", "66", "69", "72", "78"))
     saveRDS(df, filepath)
-
+    
     labels <- df %>%
       group_by(cd_fips, state_name) %>%
       summarize(long = mean(long), lat = mean(lat))
     saveRDS(labels, paste(datapath, sprintf("%s_%i_%s_labels.rda", level, year, resolution)))
-
+    
   }
   readRDS(filepath)
 }
 
 # retrieve shapefile from census and apply AK/HI transformations ---------------
-#' @export
 get_shapefile <- function(year = 2017, level, resolution = "5m") {
   # set shapefile url
   url_base <- sprintf('http://www2.census.gov/geo/tiger/GENZ%s/shp/', year)
