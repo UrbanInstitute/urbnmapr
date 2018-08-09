@@ -20,7 +20,7 @@ Depends:
     tibble, 
     mapproj,
     rappdirs,
-    magritr
+    magrittr
 Imports:
 Suggests:
     ggplot2,
