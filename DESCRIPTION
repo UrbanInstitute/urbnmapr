@@ -21,7 +21,8 @@ Depends:
     mapproj,
     rappdirs,
     magrittr, 
-    rgdal
+    rgdal, 
+    maptools
 Imports:
 Suggests:
     ggplot2,
