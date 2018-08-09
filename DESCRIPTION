@@ -22,11 +22,13 @@ Depends:
     rappdirs,
     magrittr, 
     rgdal, 
-    maptools
+    maptools,
+    dplyr, 
+    readr, 
+    broom
 Imports:
 Suggests:
     ggplot2,
-    dplyr,
     knitr,
     rmarkdown
 URL: https://github.com/UrbanInstitute/urbnmapr
