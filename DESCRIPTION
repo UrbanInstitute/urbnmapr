@@ -17,14 +17,14 @@ Description: Provides state and county shapefiles in 'tibble' format that is
     package <https://cran.r-project.org/package=fiftystater> by William Murphy.
 Depends:
     R (>= 3.4.0)
-Imports:
-    tibble,
+    tibble, 
     mapproj,
-    rappdirs
+    rappdirs,
+    magritr
+Imports:
 Suggests:
     ggplot2,
     dplyr,
-    magrittr,
     knitr,
     rmarkdown
 URL: https://github.com/UrbanInstitute/urbnmapr
