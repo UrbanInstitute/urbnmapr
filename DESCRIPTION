@@ -19,7 +19,8 @@ Depends:
     R (>= 3.4.0)
 Imports:
     tibble,
-    mapproj
+    mapproj,
+    rappdirs
 Suggests:
     ggplot2,
     dplyr,
