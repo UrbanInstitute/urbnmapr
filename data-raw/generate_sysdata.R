@@ -7,7 +7,11 @@ source('data-raw/territories_labels.R')
 source('data-raw/territories_counties.R')
 source('data-raw/ccdf.R')
 
-save(states_labels, counties_labels, ccdf_labels, territories_labels,
-     territories_counties, ccdf,
+save(states_labels,
+     counties_labels,
+     ccdf_labels,
+     territories_labels,
+     territories_counties,
+     ccdf,
      file = 'R/sysdata.rda',
      compress = 'bzip2')

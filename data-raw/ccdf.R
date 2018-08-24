@@ -146,7 +146,22 @@ star <- tribble(
 
 # combine states and territories ------------------------------------------
 
-ccdf <- rbind(fifty_states, star)
+ccdf <- rbind(fifty_states, star) %>%
+  filter(id %in% c("Alaska", "Hawaii", "American Samoa", "Commonwealth of the Northern Mariana Islands", "Guam",
+                   "Puerto Rico", "United States Virgin Islands", "Washington, D.C.")) %>%
+  rename(state_name = id)
+
+ids <- tribble(~state_name, ~state_abbv, ~state_fips,
+        "Alaska", "AK", "02",
+        "Hawaii", "HI", "15",
+        "American Samoa", "AS", "60",
+        "Commonwealth of the Northern Mariana Islands", "MP", "69",
+        "Guam", "GU", "66",
+        "Puerto Rico", "PR", "72",
+        "United States Virgin Islands",
+        "Washington, D.C.", "11")
+
+ccdf <- left_join(ccdf, ids, by = "state_name")
 
 rm(alaska, hawaii, puerto_rico, virgin_islands, guam, american_samoa, mariana_islands, fifty_states, star)
 
