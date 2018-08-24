@@ -93,10 +93,10 @@ states %>%
 Or before `geom_text()` is called:
 
 ``` r
-territories_counties <- get_urbn_map(map = "territories_counties")
+territories <- get_urbn_map(map = "territories")
 labels <- get_urbn_labels(map = "territories")
 
-territories_counties %>%
+territories %>%
   ggplot() +
   geom_polygon(aes(long, lat, group = group),
                fill = "grey", color = "#ffffff", size = 0.05) +
