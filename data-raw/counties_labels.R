@@ -5,4 +5,5 @@ library(dplyr)
 
 counties_labels <- urbnmapr::counties %>%
   group_by(county_name, state_name, county_fips, state_fips, fips_class) %>%
-  summarize(long = mean(long), lat = mean(lat))
+  summarize(lat = mean(lat), long = mean(long)) %>%
+  ungroup()
