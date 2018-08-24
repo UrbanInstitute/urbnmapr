@@ -11,7 +11,8 @@ The valid options for each are:
 1. states
 2. counties
 3. ccdf
-4. territories_counties
+4. territories
+5. territories_counties
 
 ## urbnmapr 0.0.0.9000
 
