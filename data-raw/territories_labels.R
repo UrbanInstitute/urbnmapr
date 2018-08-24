@@ -3,10 +3,8 @@
 
 territories_labels <- readr::read_csv(
 "state_name, lat, long, state_abbv
-Alaska, 22, -118, AK
-American Samoa, 16.5, -90, AS
+American Samoa, 19.5, -90, AS
 Guam, 20, -100, GU
-Hawaii, 22.5, -107, HI
-Mariana Islands, 25, -68, MP
+Mariana Islands, 22, -78.5, MP
 Puerto Rico, 21, -94, PR
 Virgin Islands, 18, -81, VI")
