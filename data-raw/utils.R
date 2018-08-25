@@ -109,7 +109,7 @@ get_shapefile <- function(year, level, resolution) {
 
   mapdata <-
     shapes[!shapes$STATEFP %in% exclude, ] %>%
-    rbind(alaska, hawaii, alaska, guam, puerto_rico, virgin_islands,
+    rbind(alaska, hawaii, guam, puerto_rico, virgin_islands,
           mariana_islands, american_samoa) %>%
     # convert from EPSG2163 to (US National Atlas Equal Area) WGS84
     spTransform(CRS("+init=epsg:4326"))
