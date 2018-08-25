@@ -85,7 +85,7 @@
       <h1>Introducing urbnmapr</h1>
                         <h4 class="author">Vignette Author</h4>
             
-            <h4 class="date">2018-07-29</h4>
+            <h4 class="date">2018-08-25</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/UrbanInstitute/urbnmapr/blob/master/vignettes/introducing-urbnmapr.Rmd"><code>vignettes/introducing-urbnmapr.Rmd</code></a></small>
       <div class="hidden name"><code>introducing-urbnmapr.Rmd</code></div>
@@ -151,19 +151,11 @@ household_data <span class="op">%&gt;%</span>
 <div id="labels" class="section level2">
 <h2 class="hasAnchor">
 <a href="#labels" class="anchor"></a>Labels</h2>
-<p>Like the map data, there are two methods for accessing map labels in <code>urbnmapr</code>. First, <code>urbnmapr</code> contains two <code>tibble</code> data frames, <code>states_labels</code> and <code>counties_labels</code>, for easily labeling the corresponding maps for <code>states</code> and <code>counties</code>.</p>
+<p>The function <code><a href="../reference/get_urbn_labels.html">get_urbn_labels()</a></code> accesses additional labels including “ccdf”, which includes elided territories roughly positioned in the direction of their true location, and “territories_counties”, which includes territories below the continuous 48 states.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(urbnmapr)
 
-states <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_polygon</span>(<span class="kw">aes</span>(long, lat, <span class="dt">group =</span> group), 
-                 <span class="dt">fill =</span> <span class="st">"grey"</span>, <span class="dt">color =</span> <span class="st">"#ffffff"</span>, <span class="dt">size =</span> <span class="fl">0.25</span>) <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_text</span>(<span class="dt">data =</span> states_labels, <span class="kw">aes</span>(long, lat, <span class="dt">label =</span> state_abbv), <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span>
-<span class="st">    </span><span class="kw">coord_map</span>(<span class="dt">projection =</span> <span class="st">"albers"</span>, <span class="dt">lat0 =</span> <span class="dv">39</span>, <span class="dt">lat1 =</span> <span class="dv">45</span>)</code></pre></div>
-<p><img src="introducing-urbnmapr_files/figure-html/blank-states-labels-1.png" width="700"></p>
-<p>Second, the function <code><a href="../reference/get_urbn_labels.html">get_urbn_labels()</a></code> accesses additional labels including “ccdf”, which includes elided territories roughly positioned in the direction of their true location, and “territories_counties”, which includes territories below the continuous 48 states.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ccdf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_urbn_map.html">get_urbn_map</a></span>(<span class="dt">map =</span> <span class="st">"ccdf"</span>)
+ccdf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_urbn_map.html">get_urbn_map</a></span>(<span class="dt">map =</span> <span class="st">"ccdf"</span>)
 ccdf_labels &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_urbn_labels.html">get_urbn_labels</a></span>(<span class="dt">map =</span> <span class="st">"ccdf"</span>)
 
 ccdf <span class="op">%&gt;%</span>

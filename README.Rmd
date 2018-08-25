@@ -4,7 +4,7 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# urbnmapr <img src="man/figures/hexsticker.png" align="right" style="width:172.6667px;height:200px;"/>
+# urbnmapr <img src="man/figures/hexsticker.png" align="right" style="width:138.1334px;height:160px;"/>
 
 [![Travis-CI Build Status](https://travis-ci.org/UrbanInstitute/urbnmapr.svg?branch=master)](https://travis-ci.org/UrbanInstitute/urbnmapr)
 
@@ -156,3 +156,7 @@ household_data %>%
 ## License
 
 Code released under the GNU General Public License v3.0.
+
+## Code of conduct
+
+Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
