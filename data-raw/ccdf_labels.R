@@ -1,7 +1,8 @@
-library(tidyverse)
+# labels for ccdf map
+# to be called only by generate_sysdata.R for internal package use
 
-
-ccdf_labels <- read_csv("state_name, lat, long, state_abbv
+ccdf_labels <- readr::read_csv(
+"state_name, lat, long, state_abbv
 Alabama, 32.7794, -86.8287, AL
 Alaska, 45.5, -133, AK
 American Samoa, 33.5, -128.2, AS
@@ -58,6 +59,3 @@ Washington, 47.3826, -120, WA
 West Virginia, 38.6409, -80.6227, WV
 Wisconsin, 44.6243, -89.9941, WI
 Wyoming, 42.9957, -107.5512, WY")
-
-save(ccdf_labels, file = "output-data/ccdf-labels.rda", compress = "bzip2")
-

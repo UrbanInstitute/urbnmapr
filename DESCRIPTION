@@ -1,7 +1,7 @@
 Package: urbnmapr
 Type: Package
 Title: State and county shapefiles in tibble format
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Authors@R: c(
     person('Sarah', 'Strochak', email = 'sstrochak@urban.org', role = c('aut', 'cre')),
     person('Kyle', 'Ueyama', email = 'kueyama@urban.org', role = 'aut'),
@@ -21,9 +21,9 @@ Imports:
     tibble,
     mapproj
 Suggests:
-    ggplot2,
-    dplyr,
-    magrittr,
+    tidyverse,
+    urbnthemes,
+    scales,
     knitr,
     rmarkdown
 URL: https://github.com/UrbanInstitute/urbnmapr

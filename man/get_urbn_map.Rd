@@ -7,7 +7,7 @@
 get_urbn_map(map = "states")
 }
 \arguments{
-\item{map}{Selection of custom map. Current options are \code{"states"}, \code{"counties"}, \code{"ccdf"}, and \code{"territories_counties"}.}
+\item{map}{Selection of custom map. Current options are \code{"states"}, \code{"counties"}, \code{"ccdf"}, \code{"territories"}, and \code{"territories_counties"}.}
 }
 \description{
 \code{get_urbn_map()} loads maps that are different than \code{states} and \code{counties}

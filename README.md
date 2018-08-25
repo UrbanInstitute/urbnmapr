@@ -29,7 +29,9 @@ devtools::install_github("UrbanInstitute/urbnmapr")
 Usage
 -----
 
-`urbnmapr` contains two `tibble` dataframes:
+### Quick maps
+
+`urbnmapr` contains two `tibble` dataframes for creating maps:
 
 -   `states`
 -   `counties`
@@ -42,8 +44,8 @@ library(urbnmapr)
 
 states %>%
   ggplot(aes(long, lat, group = group)) +
-    geom_polygon(fill = "grey", color = "#ffffff", size = 0.25) +
-    coord_map(projection = "albers", lat0 = 39, lat1 = 45)
+  geom_polygon(fill = "grey", color = "#ffffff", size = 0.25) +
+  coord_map(projection = "albers", lat0 = 39, lat1 = 45)
 ```
 
 ![](README_files/figure-markdown_github/blank-state-1.png)
@@ -51,11 +53,58 @@ states %>%
 ``` r
 counties %>%
   ggplot(aes(long, lat, group = group)) +
-    geom_polygon(fill = "grey", color = "#ffffff", size = 0.05) +
-    coord_map(projection = "albers", lat0 = 39, lat1 = 45)
+  geom_polygon(fill = "grey", color = "#ffffff", size = 0.05) +
+  coord_map(projection = "albers", lat0 = 39, lat1 = 45)
 ```
 
 ![](README_files/figure-markdown_github/blank-county-1.png)
+
+### More maps
+
+Additional maps can be accessed with `get_urbn_map()`. Use the function to create a tibble in your global environment and then map using the same syntax as above.
+
+``` r
+territories_counties <- get_urbn_map(map = "territories_counties")
+
+territories_counties %>%
+  ggplot(aes(long, lat, group = group)) +
+  geom_polygon(fill = "grey", color = "#ffffff", size = 0.05) +
+  coord_map(projection = "albers", lat0 = 39, lat1 = 45)
+```
+
+![](README_files/figure-markdown_github/get_urbn_map-1.png)
+
+### Labels
+
+Labels for all maps can be accessed with `get_urbn_labels()`. Use the function to call the appropriate labels and then label the map with `geom_text()`. Labels can be called inside of `geom_text()`:
+
+``` r
+states %>%
+  ggplot() +
+  geom_polygon(aes(long, lat, group = group), 
+               fill = "grey", color = "#ffffff", size = 0.25) +
+  coord_map(projection = "albers", lat0 = 39, lat1 = 45) +
+  geom_text(data = get_urbn_labels(map = "states"), aes(x = long, lat, label = state_abbv), 
+            size = 3)
+```
+
+![](README_files/figure-markdown_github/quick-labels-1.png)
+
+Or before `geom_text()` is called:
+
+``` r
+territories <- get_urbn_map(map = "territories")
+labels <- get_urbn_labels(map = "territories")
+
+territories %>%
+  ggplot() +
+  geom_polygon(aes(long, lat, group = group),
+               fill = "grey", color = "#ffffff", size = 0.05) +
+  coord_map(projection = "albers", lat0 = 39, lat1 = 45) +
+  geom_text(data = labels, aes(x = long, lat, label = state_abbv), size = 3) 
+```
+
+![](README_files/figure-markdown_github/get_urbn_labels-1.png)
 
 Merging Data
 ------------
@@ -94,6 +143,9 @@ library(urbnthemes)
 
 set_urbn_defaults(style = "map")
 ```
+
+    ## Warning: New theme missing the following elements: plot.tag,
+    ## plot.tag.position
 
 ``` r
 statedata %>% 
