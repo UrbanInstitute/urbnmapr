@@ -5,3 +5,4 @@
 ^README-.*\.png$
 ^README_files$
 ^\.travis\.yml$
+^docs$

@@ -9,58 +9,132 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-The `urbnmapr` package provides state and county shapefiles in `tibble` format 
-that is compatible to map with `ggplot2`. 
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(message = FALSE)
+options(scipen = 999)
+```
 
-Shapefiles include Alaska and Hawaii, transformed to be displayed as insets 
+The `urbnmapr` package provides state, county, and other shapefiles in `tibble` format 
+that is compatible to map with `ggplot2`. Shapefiles include Alaska and Hawaii, transformed to be displayed as insets 
 within the continental United States.
 
-This work is heavily inspired by and derived in part from the fiftystater 
-package <https://cran.r-project.org/package=fiftystater> by William Murphy.
+This package is heavily inspired by and derived in part from the [fiftystater package](https://cran.r-project.org/package=fiftystater) by William Murphy. In contrast, `urbnmapr`:
 
-## Usage
+  - Uses shapefiles from the US Census Bureau
+  - Converts the shapefile data to a `tibble` data frame
+  - Adds various identifiers for merging
+  - Includes a county-level shapefile 
 
-`urbnmapr` contains two `tibble` dataframes:
+## Getting data
 
-  - `states`
-  - `counties`
+There are two methods for accessing map data in `urbnmapr`. First, `urbnmapr` contains two `tibble` data frames, `states` and `counties`, for easily accessing simple state and county map data. 
 
-The `states` and `counties` tibbles can be used with `geom_polygon()` and 
-`coord_map()` to create base maps of the continental United States, with Alaska 
-and Hawaii displayed as insets:
+The `states` and `counties` tibbles can be used with `geom_polygon()` and `coord_map()` to create base maps of the continental United States, with Alaska and Hawaii displayed as insets:
 
 ```{r blank-states}
-library(ggplot2)
-library(dplyr)
-library(tibble)
-library(magrittr)
+library(tidyverse)
 library(urbnmapr)
 
 states %>%
   ggplot(aes(long, lat, group = group)) +
-   geom_polygon(fill = "grey", color = "#ffffff", size = 0.25) +
-   coord_map(projection = "albers", lat0 = 39, lat1 = 45)
+    geom_polygon(fill = "grey", color = "#ffffff", size = 0.25) +
+    coord_map(projection = "albers", lat0 = 39, lat1 = 45)
 ```
 
 ```{r blank-counties}
 counties %>%
   ggplot(aes(long, lat, group = group)) +
-   geom_polygon(fill = "grey", color = "#ffffff", size = 0.25) +
-   coord_map(projection = "albers", lat0 = 39, lat1 = 45)
+    geom_polygon(fill = "grey", color = "#ffffff", size = 0.05) +
+    coord_map(projection = "albers", lat0 = 39, lat1 = 45)
 ```
 
-## Merging Data
+Second, the function `get_urbn_map()` accesses additional maps including "ccdf", which includes elided territories roughly positioned in the direction of their true location, and "territories_counties", which includes territories below the continuous 48 states. 
 
-The `states` and `counties` tibbles include various identifiers to make merging 
-data easy.
+```{r blank-territories-counties}
+ccdf <- get_urbn_map(map = "territories_counties")
+
+ccdf %>%
+  ggplot(aes(long, lat, group = group)) +
+    geom_polygon(fill = "grey", color = "#ffffff", size = 0.25) +
+    coord_map(projection = "albers", lat0 = 39, lat1 = 45)
+```
+
+## Merging data
+
+All tibbles include various identifiers to simplify merging data. The states `states` tibble contains `state_fips`, `state_abbv`, and `state_name`. The `counties` tibble contains `county_fips`, `state_abbv`, `state_fips`,  `county_name`, and `state_name`. Both tibbles can be piped into `ggplot2` to create a choropleth map.
 
 ```{r us-choropleth}
-USArrests %>%
-  rownames_to_column('state_name') %>%
-  select(state_name, Murder) %>%
-  left_join(states, by = 'state_name') %>%
-  ggplot(aes(long, lat, group = group, fill = Murder)) +
-   geom_polygon(color = "#ffffff") +
-   coord_map(projection = "albers", lat0 = 39, lat1 = 45)
+statedata %>% 
+  left_join(states, by = "state_name") %>% 
+  ggplot(mapping = aes(long, lat, group = group, fill = horate)) +
+  geom_polygon(color = "#ffffff", size = 0.25) +
+  coord_map(projection = "albers", lat0 = 39, lat1 = 45) +
+  labs(fill = "Homeownership rate")
 ```
 
+```{r county}
+household_data <- left_join(countydata, counties, by = "county_fips") 
+
+household_data %>%
+  ggplot(aes(long, lat, group = group, fill = medhhincome)) +
+    geom_polygon(color = "#ffffff", size = 0.05) +
+    coord_map(projection = "albers", lat0 = 39, lat1 = 45)
+```
+
+## Labels
+
+The function `get_urbn_labels()` accesses additional labels including "ccdf", which includes elided territories roughly positioned in the direction of their true location, and "territories_counties", which includes territories below the continuous 48 states. 
+
+```{r blank-ccdf-labels}
+library(tidyverse)
+library(urbnmapr)
+
+ccdf <- get_urbn_map(map = "ccdf")
+ccdf_labels <- get_urbn_labels(map = "ccdf")
+
+ccdf %>%
+  ggplot() +
+    geom_polygon(aes(long, lat, group = group), 
+                 fill = "grey", color = "#ffffff", size = 0.25) +
+    geom_text(data = ccdf_labels, aes(long, lat, label = state_abbv), size = 3) +  
+    coord_map(projection = "albers", lat0 = 39, lat1 = 45)
+```
+
+## Styles
+
+`library(urbnmapr)` works well with the [library(urbnthemes)](https://github.com/UI-Research/urbnthemes)
+
+```{r theme-state}
+library(urbnthemes)
+
+set_urbn_defaults(style = "map")
+
+statedata %>% 
+  left_join(states, by = "state_name") %>% 
+  ggplot(mapping = aes(long, lat, group = group, fill = horate)) +
+  geom_polygon(color = "#ffffff", size = 0.25) +
+  coord_map(projection = "albers", lat0 = 39, lat1 = 45) +
+  scale_fill_gradientn(labels = scales::percent) +
+   theme(legend.position = "right",
+         legend.direction = "vertical",
+         legend.title = element_text(face = "bold", size = 11),
+         legend.key.height = unit(.2, "in")) +
+  labs(fill = "Homeownership rate")
+
+```
+
+```{r theme-counties}
+household_data %>%
+  filter(state_name %in% c("Virginia", "Maryland", "District of Columbia")) %>%
+  ggplot(aes(long, lat, group = group, fill = medhhincome)) +
+    geom_polygon(color = "#ffffff", size = 0.05) +
+    coord_map(projection = "albers", lat0 = 39, lat1 = 45) +
+    scale_fill_gradientn(labels = scales::dollar) +
+    theme(legend.position = "right",
+          legend.direction = "vertical",
+          legend.title = element_text(face = "bold", size = 11),
+          legend.key.height = unit(.25, "in")) +
+  labs(fill = "Median household income")
+```

@@ -10,7 +10,7 @@ options(scipen = 999)
 
 # Define functions --------------------------------------------------------
 transform_state <- function(object, rot, scale, shift){
-  object %>% 
+  object %>%
     elide(rotate = rot) %>%
     elide(scale = max(apply(bbox(object), 1, diff)) / scale) %>%
     elide(shift = shift)
@@ -31,7 +31,7 @@ if (!file.exists(temp)) {
   temp_dir <- tempdir()
   unzip(temp, exdir = temp_dir)
 }
- 
+
 # https://www.census.gov/geo/maps-data/data/tiger-line.html
 fifty_states_sp <- readOGR(dsn = temp_dir, layer = shape_base, verbose = FALSE) %>%
   # Convert from NAD83 to EPSG 2163 (US National Atlas Equal Area)
@@ -62,35 +62,35 @@ proj4string(hawaii) <- proj4string(fifty_states_sp)
 puerto_rico <- fifty_states_sp[fifty_states_sp$NAME %in% c("Puerto Rico"), ] %>%
   transform_state(rot = 0, scale = 1, shift = c(-1350000, 1000000))
 
-proj4string(puerto_rico) <- proj4string(fifty_states_sp) 
+proj4string(puerto_rico) <- proj4string(fifty_states_sp)
 
 # virgin islands ----------------------------------------------------------
 
 virgin_islands <- fifty_states_sp[fifty_states_sp$NAME %in% c("United States Virgin Islands"), ] %>%
   transform_state(rot = 0, scale = 0.1, shift = c(2150000, -1600000))
 
-proj4string(virgin_islands) <- proj4string(fifty_states_sp) 
+proj4string(virgin_islands) <- proj4string(fifty_states_sp)
 
 # guam --------------------------------------------------------------------
 
 guam <- fifty_states_sp[fifty_states_sp$NAME %in% c("Guam"), ] %>%
   transform_state(rot = -35, scale = 0.3, shift = c(-2600000, -700000))
 
-proj4string(guam) <- proj4string(fifty_states_sp) 
+proj4string(guam) <- proj4string(fifty_states_sp)
 
 # american samoa ----------------------------------------------------------
 
 american_samoa <- fifty_states_sp[fifty_states_sp$NAME %in% c("American Samoa"), ] %>%
   transform_state(rot = -35, scale = 0.15, shift = c(-4250000, -1450000))
 
-proj4string(american_samoa) <- proj4string(fifty_states_sp) 
+proj4string(american_samoa) <- proj4string(fifty_states_sp)
 
 # mariana islands ---------------------------------------------------------
 
 mariana_islands <- fifty_states_sp[fifty_states_sp$NAME %in% c("Commonwealth of the Northern Mariana Islands"), ] %>%
   transform_state(rot = -35, scale = 0.1, shift = c(-3600000, -1250000))
 
-proj4string(mariana_islands) <- proj4string(fifty_states_sp) 
+proj4string(mariana_islands) <- proj4string(fifty_states_sp)
 
 mariana_islands <- mariana_islands %>%
   # transforms into longitude/latitude
@@ -112,7 +112,7 @@ fifty_states <-
   rbind(guam) %>%
   rbind(american_samoa) %>%
   # convert from EPSG2163 to (US National Atlas Equal Area) WGS84
-  spTransform(CRS("+init=epsg:4326")) %>% 
+  spTransform(CRS("+init=epsg:4326")) %>%
   tidy(region = "NAME") %>%
   mutate(id = id) %>%
   as_tibble() %>%
@@ -121,16 +121,16 @@ fifty_states <-
 # star for Washington, D.C. -----------------------------------------------
 star <- tribble(
   ~x, ~y, ~order, ~hole, ~piece, ~group, ~id,
-  1, 0, 1, FALSE, 1, "Washington, D.C.",  "Washington, D.C.", 
-  0.3, -0.2, 2, FALSE, 1, "Washington, D.C.",  "Washington, D.C.", 
-  0.3, -0.95, 3, FALSE, 1, "Washington, D.C.",  "Washington, D.C.", 
-  -0.1, -0.375, 4, FALSE, 1, "Washington, D.C.",  "Washington, D.C.", 
-  -0.8, -0.6, 5,  FALSE, 1, "Washington, D.C.",  "Washington, D.C.", 
-  -0.39, 0, 6,  FALSE, 1, "Washington, D.C.",  "Washington, D.C.", 
-  -0.8, 0.6, 7,  FALSE, 1, "Washington, D.C.",  "Washington, D.C.", 
-  -0.1, 0.375, 8, FALSE, 1, "Washington, D.C.",  "Washington, D.C.", 
-  0.3, 0.95, 9, FALSE, 1, "Washington, D.C.",  "Washington, D.C.", 
-  0.3, 0.2, 10, FALSE, 1, "Washington, D.C.",  "Washington, D.C.", 
+  1, 0, 1, FALSE, 1, "Washington, D.C.",  "Washington, D.C.",
+  0.3, -0.2, 2, FALSE, 1, "Washington, D.C.",  "Washington, D.C.",
+  0.3, -0.95, 3, FALSE, 1, "Washington, D.C.",  "Washington, D.C.",
+  -0.1, -0.375, 4, FALSE, 1, "Washington, D.C.",  "Washington, D.C.",
+  -0.8, -0.6, 5,  FALSE, 1, "Washington, D.C.",  "Washington, D.C.",
+  -0.39, 0, 6,  FALSE, 1, "Washington, D.C.",  "Washington, D.C.",
+  -0.8, 0.6, 7,  FALSE, 1, "Washington, D.C.",  "Washington, D.C.",
+  -0.1, 0.375, 8, FALSE, 1, "Washington, D.C.",  "Washington, D.C.",
+  0.3, 0.95, 9, FALSE, 1, "Washington, D.C.",  "Washington, D.C.",
+  0.3, 0.2, 10, FALSE, 1, "Washington, D.C.",  "Washington, D.C.",
   1, 0, 11, FALSE, 1, "Washington, D.C.",  "Washington, D.C."
 ) %>%
   # roate star by mutliplying points by rotation matrix
@@ -146,22 +146,23 @@ star <- tribble(
 
 # combine states and territories ------------------------------------------
 
-combined <- rbind(fifty_states, star)
+ccdf <- rbind(fifty_states, star) %>%
+  filter(id %in% c("Alaska", "Hawaii", "American Samoa", "Commonwealth of the Northern Mariana Islands", "Guam",
+                   "Puerto Rico", "United States Virgin Islands", "Washington, D.C.")) %>%
+  rename(state_name = id)
+
+ids <- tribble(~state_name, ~state_abbv, ~state_fips,
+        "Alaska", "AK", "02",
+        "Hawaii", "HI", "15",
+        "American Samoa", "AS", "60",
+        "Commonwealth of the Northern Mariana Islands", "MP", "69",
+        "Guam", "GU", "66",
+        "Puerto Rico", "PR", "72",
+        "United States Virgin Islands",
+        "Washington, D.C.", "11")
+
+ccdf <- left_join(ccdf, ids, by = "state_name")
 
 rm(alaska, hawaii, puerto_rico, virgin_islands, guam, american_samoa, mariana_islands, fifty_states, star)
-
-
-
-load("H:/ccdf-map/output-data/ccdf-labels.rda")
-
-
-combined %>%
-  mutate(boom = ifelse(id == "United States Virgin Islands", "yes", "no")) %>%
-  ggplot() +
-  geom_polygon(aes(long, lat, group = group, fill = boom),alpha = 0.5,  color = "#ffffff", size = 0.25) +
-  #  geom_text(data = state_labels, aes(longitude, latitude, label = abbreviation)) +
-  geom_text(data = ccdf_labels, aes(long, lat, label = state_abbv)) +
-  scale_x_continuous(limits = c(-140, -55)) +
-  coord_map(projection = "albers", lat0 = 39, lat1 = 45)
 
 #write_csv(combined, "output-data/ccdf-map.csv")
