@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-urbnmapr
-========
+urbnmapr <img src="man/figures/hexsticker.png" align="right" style="width:172.6667px;height:200px;"/>
+=====================================================================================================
 
 [![Travis-CI Build Status](https://travis-ci.org/UrbanInstitute/urbnmapr.svg?branch=master)](https://travis-ci.org/UrbanInstitute/urbnmapr)
 
@@ -143,9 +143,6 @@ library(urbnthemes)
 
 set_urbn_defaults(style = "map")
 ```
-
-    ## Warning: New theme missing the following elements: plot.tag,
-    ## plot.tag.position
 
 ``` r
 statedata %>% 
