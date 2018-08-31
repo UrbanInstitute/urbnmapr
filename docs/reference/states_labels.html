@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Changelog • urbnmapr</title>
+<title>States labels data — states_labels • urbnmapr</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,7 +30,10 @@
 
 
 
-<meta property="og:title" content="Changelog" />
+<meta property="og:title" content="States labels data — states_labels" />
+
+<meta property="og:description" content="States labels data" />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -46,7 +49,7 @@
   </head>
 
   <body>
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -112,47 +115,36 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Changelog <small></small></h1>
-      <small>Source: <a href='https://github.com/UrbanInstitute/urbnmapr/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
+    <h1>States labels data</h1>
+    <small class="dont-index">Source: <a href='https://github.com/UrbanInstitute/urbnmapr/blob/master/R/states_labels.R'><code>R/states_labels.R</code></a></small>
+    <div class="hidden name"><code>states_labels.Rd</code></div>
     </div>
 
-    <div id="urbnmapr-0-0-0-9001" class="section level2">
-<h2 class="hasAnchor">
-<a href="#urbnmapr-0-0-0-9001" class="anchor"></a>urbnmapr 0.0.0.9001</h2>
-<p>Two functions have been added to the package, with two additional shape options:</p>
-<ul>
-<li>
-<code>get_urbn_map</code> will return the requested shapefile, parsed into a <code>tibble</code>
-</li>
-<li>
-<code>get_urbn_labels</code> will return a <code>tibble</code> of coordinates and map labels</li>
-</ul>
-<p>The valid options for each are:</p>
-<ol>
-<li>states</li>
-<li>counties</li>
-<li>ccdf</li>
-<li>territories</li>
-<li>territories_counties</li>
-</ol>
-</div>
-    <div id="urbnmapr-0-0-0-9000" class="section level2">
-<h2 class="hasAnchor">
-<a href="#urbnmapr-0-0-0-9000" class="anchor"></a>urbnmapr 0.0.0.9000</h2>
-<p>This is the initial release of the <code>urbnmapr</code> package. It includes state and county-level shapefiles parsed into a <code>tibble</code> for easy plotting with <code>ggplot2</code>.</p>
-</div>
-  </div>
+    <div class="ref-description">
+    
+    <p>States labels data</p>
+    
+    </div>
 
+    <pre class="usage"><span class='no'>states_labels</span></pre>
+        
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+
+    <p>Data frame with columns</p><dl class='dl-horizontal'>
+<dt>long, lat</dt><dd><p>Longitude and latitude</p></dd>
+<dt>state_name, state_abbv</dt><dd><p>State name and state abbreviation</p></dd>
+</dl>
+    
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#urbnmapr-0-0-0-9001">0.0.0.9001</a></li>
-        <li><a href="#urbnmapr-0-0-0-9000">0.0.0.9000</a></li>
-      </ul>
-    </div>
-  </div>
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      
+      <li><a href="#format">Format</a></li>
+          </ul>
 
+  </div>
 </div>
 
       <footer>

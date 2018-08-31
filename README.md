@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-urbnmapr
-========
+urbnmapr <img src="man/figures/hexsticker.png" align="right" style="width:138.1334px;height:160px;"/>
+=====================================================================================================
 
 [![Travis-CI Build Status](https://travis-ci.org/UrbanInstitute/urbnmapr.svg?branch=master)](https://travis-ci.org/UrbanInstitute/urbnmapr)
 
@@ -139,11 +139,10 @@ Styles
 `library(urbnmapr)` works well with the [Urban Institute `ggplot2` theme.](https://github.com/UrbanInstitute/urban_R_theme)
 
 ``` r
-source("https://raw.githubusercontent.com/UrbanInstitute/urban_R_theme/urban_R_theme_revamp/urban_theme.R")
-```
+library(urbnthemes)
 
-    ## Warning: New theme missing the following elements: plot.tag,
-    ## plot.tag.position
+set_urbn_defaults(style = "map")
+```
 
 ``` r
 statedata %>% 
@@ -152,11 +151,6 @@ statedata %>%
   geom_polygon(color = "#ffffff", size = .25) +
   coord_map(projection = "albers", lat0 = 39, lat1 = 45) +
   scale_fill_gradientn(labels = scales::percent) +
-  urban_map +
-   theme(legend.position = "right",
-          legend.direction = "vertical",
-          legend.title = element_text(face = "bold", size = 11),
-          legend.key.height = unit(.2, "in")) +
   labs(fill = "Homeownership rate")
 ```
 
@@ -169,11 +163,6 @@ household_data %>%
     geom_polygon(color = "#ffffff", size = 0.05) +
     coord_map(projection = "albers", lat0 = 39, lat1 = 45) +
     scale_fill_gradientn(labels = scales::dollar) +
-    urban_map +
-    theme(legend.position = "right",
-          legend.direction = "vertical",
-          legend.title = element_text(face = "bold", size = 11),
-          legend.key.height = unit(.25, "in")) +
   labs(fill = "Median household income")
 ```
 
@@ -183,3 +172,8 @@ License
 -------
 
 Code released under the GNU General Public License v3.0.
+
+Code of conduct
+---------------
+
+Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
