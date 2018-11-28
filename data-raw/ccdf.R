@@ -5,9 +5,9 @@ american_samoa <- get_ccdf_shapefile(2016, "county", "5m") %>%
   filter(state_name == "American Samoa")
 
 # get state shapefile, tidy, add fips data
-territories <- get_ccdf_shapefile(2016, "state", "5m") %>%
+ccdf <- get_ccdf_shapefile(2016, "state", "5m") %>%
   filter(state_fips %in% c("02", "11", "15", "52", "66", "69", "72", "78")) %>%
   mutate(group = as.character(group),
          piece = as.character(piece))
 
-ccdf <- bind_rows(territories, american_samoa)
+ccdf <- bind_rows(ccdf, american_samoa)
