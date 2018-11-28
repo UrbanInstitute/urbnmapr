@@ -5,17 +5,17 @@ ccdf_labels <- readr::read_csv(
 "state_name, lat, long, state_abbv
 Alabama, 32.7794, -86.8287, AL
 Alaska, 45.5, -133, AK
-American Samoa, 33.5, -128.2, AS
+American Samoa, 31.2, -127, AS
 Arizona, 34.2744, -111.6602, AZ
 Arkansas, 34.8938, -92.4426, AR
 California, 37.1841, -119.4696, CA
 Colorado, 38.9972, -105.5478, CO
 Connecticut, 41, -71.5, CT
 Delaware, 39, -73.6, DE
-District of Columbia, 36.5, -75, DC
+District of Columbia, 36.7, -73.2, DC
 Florida, 28.6305, -81.6, FL
 Georgia, 32.6415, -83.4426, GA
-Guam, 37, -128.5, GU
+Guam, 36.6, -129, GU
 Hawaii, 35, -125.5, HI
 Idaho, 44.3509, -115, ID
 Illinois, 40.0417, -89.1965, IL
@@ -45,7 +45,7 @@ Ohio, 40.2862, -82.7937, OH
 Oklahoma, 35.5889, -97.4943, OK
 Oregon, 43.9336, -120.5583, OR
 Pennsylvania, 40.8781, -77.7996, PA
-Puerto Rico, 31, -74, PR
+Puerto Rico, 31, -74.5, PR
 Rhode Island, 41, -69.8, RI
 South Carolina, 33.9169, -80.8964, SC
 South Dakota, 44.4443, -100.2263, SD
@@ -53,7 +53,7 @@ Tennessee, 35.8580, -86.3505, TN
 Texas, 31.4757, -99.3312, TX
 Utah, 39.3055, -111.6703, UT
 Vermont, 45.5, -74, VT
-Virgin Islands, 29, -74.5, VI
+Virgin Islands, 27.3, -75.5, VI
 Virginia, 37.6, -78.3, VA
 Washington, 47.3826, -120, WA
 West Virginia, 38.6409, -80.6227, WV
