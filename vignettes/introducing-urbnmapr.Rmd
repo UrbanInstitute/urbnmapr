@@ -58,6 +58,8 @@ ccdf <- get_urbn_map(map = "territories_counties")
 ccdf %>%
   ggplot(aes(long, lat, group = group)) +
     geom_polygon(fill = "grey", color = "#ffffff", size = 0.25) +
+    scale_x_continuous(limits = c(-141, -55)) +
+    scale_y_continuous(limits = c(24, 50)) +  
     coord_map(projection = "albers", lat0 = 39, lat1 = 45)
 ```
 
@@ -99,6 +101,8 @@ ccdf %>%
     geom_polygon(aes(long, lat, group = group), 
                  fill = "grey", color = "#ffffff", size = 0.25) +
     geom_text(data = ccdf_labels, aes(long, lat, label = state_abbv), size = 3) +  
+    scale_x_continuous(limits = c(-141, -55)) +
+    scale_y_continuous(limits = c(24, 50)) +  
     coord_map(projection = "albers", lat0 = 39, lat1 = 45)
 ```
 
