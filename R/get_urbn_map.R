@@ -66,7 +66,5 @@ get_urbn_map <- function(map = "states", sf = FALSE) {
            call. = FALSE
       )
     }
-
   }
-
 }

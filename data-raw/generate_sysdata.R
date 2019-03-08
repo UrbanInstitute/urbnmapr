@@ -16,9 +16,11 @@ source('data-raw/territories_sf.R')
 
 
 save(states_labels,
+     states_labels_sf,
      counties_labels,
      ccdf_labels,
      territories_labels,
+     territories_labels_sf,
      territories_counties,
      territories,
      ccdf,
