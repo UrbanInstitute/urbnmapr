@@ -3,7 +3,7 @@
 #' `get_urbn_labels()` loads labels and coordinates for maps from the `get_urbn_map()` functions.
 #' Note: there are currently only `sf` options for `states` and `territories_states`, as
 #' these are the only options that have custom labels. To label `counties` and `territories_counties`,
-#' use `geom_text()` or `geom_label()` with the option `stat = "sf_coordinates"``
+#' use `geom_sf_text()` or `geom__sf_label()`.
 #'
 #' @param map Selection of custom labels. Current options are `"states"`, `"counties"`, `"ccdf"`, `"territories"`, and `"territories_counties"`.
 #' @param sf Option indicates whether data is loaded as a `tibble()` or an `sf` object
