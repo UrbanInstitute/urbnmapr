@@ -20,7 +20,7 @@ col_types = cols(county_name = col_character(),
 territories_labels_sf <- territories_labels %>%
   # convert to SF
   sf::st_as_sf(coords = c("long", "lat")) %>%
-  # set Albers crs
-  sf::st_set_crs(5070) %>%
+  # set crs to match states
+  sf::st_set_crs(4326) %>%
   # get rid of county variables
   select(-county_name, -fips_class, -county_fips)

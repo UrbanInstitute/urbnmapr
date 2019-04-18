@@ -59,7 +59,7 @@ Wyoming, 42.9957, -107.5512, WY")
 states_labels_sf <- states_labels %>%
   # convert to SF
   sf::st_as_sf(coords = c("long", "lat")) %>%
-  # set Albers CRS
-  sf::st_set_crs(5070) %>%
+  # set CRS
+  sf::st_set_crs(4326) %>%
   # add FIPS codes
   left_join(get_state_fips(), by = c("state_name", "state_abbv"))
