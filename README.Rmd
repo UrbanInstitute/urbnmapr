@@ -8,16 +8,16 @@ output: github_document
 
 [![Travis-CI Build Status](https://travis-ci.org/UrbanInstitute/urbnmapr.svg?branch=master)](https://travis-ci.org/UrbanInstitute/urbnmapr)
 
-The `urbnmapr` package provides state and county shapefiles in `tibble` format that is compatible to map with `ggplot2`.
+The `urbnmapr` package provides state and county shapefiles in `sf`, `tibble` format that is compatible to map with `ggplot2`.
 
-Shapefiles include Alaska and Hawaii, transformed to be displayed as insets within the continental United States.
+Shapefiles include Alaska and Hawaii, transformed to be displayed as insets within the continental United States. There are options to include the territories for both the state and county maps.
 
 This package is heavily inspired by and derived in part from the [fiftystater package](https://cran.r-project.org/package=fiftystater) by William Murphy. In contrast, `urbnmapr`:
 
   - Uses shapefiles from the US Census Bureau
-  - Converts the shapefile data to a `tibble` dataframe
+  - Converts the shapefile data to either `sf` or `tibble` format
   - Adds various identifiers for merging
-  - Includes a county-level shapefile 
+  - Includes a county-level shapefile and options to add territories
 
 ## Installation
 
@@ -32,12 +32,28 @@ devtools::install_github("UrbanInstitute/urbnmapr")
 
 ### Quick maps
 
-`urbnmapr` contains two `tibble` dataframes for creating maps:
+The `get_urbn_map()` function can be used to call shapefiles. Using the `sf = TRUE` option will load `sf` objects. These can be used with `geom_sf()` and `coord_sf` to create base maps of the continental United States, with Alaska and Hawaii displayed as insets:
+
+```{r sf-state, message=FALSE}
+
+library(tidyverse)
+library(urbnmapr)
+
+states_sf <- get_urbn_map("states", sf = TRUE)
+
+states_sf %>% 
+  ggplot(aes()) +
+  geom_sf(fill = "grey", color = "#ffffff") +
+  coord_sf(crs = 2163)
+
+```
+
+Additionally, `urbnmapr` contains two `tibble` dataframes for creating maps, that can be called separately.
 
   - `states`
   - `counties`
 
-The `states` and `counties` tibbles can be used with `geom_polygon()` and `coord_map()` to create base maps of the continental United States, with Alaska and Hawaii displayed as insets:
+The `states` and `counties` tibbles can be used with `geom_polygon()` and `coord_map()`.
 
 ```{r blank-state, message=FALSE}
 library(tidyverse)
@@ -47,6 +63,7 @@ states %>%
   ggplot(aes(long, lat, group = group)) +
   geom_polygon(fill = "grey", color = "#ffffff", size = 0.25) +
   coord_map(projection = "albers", lat0 = 39, lat1 = 45)
+
 ```
 
 ```{r blank-county}
