@@ -3,6 +3,8 @@
 # county data
 american_samoa_sf <- get_shapefile(2016, 'county', '5m') %>%
   sf::st_as_sf() %>%
+  # set prejection to US National Atlas Equal Area
+  sf::st_transform(crs = 2163) %>%
   mutate(county_fips = paste0(STATEFP, COUNTYFP)) %>%
   select(county_fips) %>%
   left_join(get_county_fips(), by = "county_fips") %>%
@@ -15,6 +17,8 @@ american_samoa_sf <- get_shapefile(2016, 'county', '5m') %>%
 # get state shapefile, tidy, add fips data
 territories_sf <- get_shapefile(2016, 'state', '5m') %>%
   sf::st_as_sf() %>%
+  # set prejection to US National Atlas Equal Area
+  sf::st_transform(crs = 2163) %>%
   select(state_fips = STATEFP) %>%
   left_join(get_state_fips(), by = "state_fips") %>%
   filter(state_fips %in% c("02", "15", "66", "69", "72", "78"))

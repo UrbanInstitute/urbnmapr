@@ -2,7 +2,7 @@
 #'
 #' `get_urbn_map()` loads maps that are different than `states` and `counties`
 #'
-#' @param map Selection of custom map. Current options are `"states"`, `"counties"`, `"ccdf"`, `"territories"`, and `"territories_counties"`.
+#' @param map Selection of custom map. Current options are `"states"`, `"counties"`, `"ccdf"`, `"territories_states"`, and `"territories_counties"`.
 #' @param sf Option indicates whether data is loaded as a `tibble()` or an `sf` object
 #'
 #' @md
