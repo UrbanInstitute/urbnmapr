@@ -7,7 +7,7 @@
 get_urbn_map(map = "states", sf = FALSE)
 }
 \arguments{
-\item{map}{Selection of custom map. Current options are \code{"states"}, \code{"counties"}, \code{"ccdf"}, \code{"territories"}, and \code{"territories_counties"}.}
+\item{map}{Selection of custom map. Current options are \code{"states"}, \code{"counties"}, \code{"ccdf"}, \code{"territories_states"}, and \code{"territories_counties"}.}
 
 \item{sf}{Option indicates whether data is loaded as a \code{tibble()} or an \code{sf} object}
 }
