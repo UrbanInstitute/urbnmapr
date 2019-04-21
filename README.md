@@ -99,6 +99,8 @@ Merging Data
 
 The states and counties spatial data include various identifiers to simplify merging data. The states `states` tibble contains `state_fips`, `state_abbv`, and `state_name`. The `counties` tibble contains `county_fips`, `state_abbv`, `state_fips`, `county_name`, and `state_name`.
 
+Continuous data can be mapping on a color scale.
+
 ``` r
 spatial_data <- left_join(statedata,
                           get_urbn_map(map = "states", sf = TRUE),
@@ -113,14 +115,21 @@ ggplot() +
 
 ![](README_files/figure-markdown_github/us-choropleth-1.png)
 
+Categorical data can be mapped on a discrete color scale.
+
 ``` r
 counties_sf <- get_urbn_map(map = "counties", sf = TRUE)
-household_data <- left_join(countydata, counties_sf, by = "county_fips")
+county_groups <- countydata %>% 
+  mutate(cat_var = paste0("Group ",
+                          sample(1:4, nrow(countydata), replace = TRUE)))
+
+household_data <- left_join(county_groups, counties_sf, by = "county_fips")
 
 household_data %>%
   ggplot() +
-  geom_sf(mapping = aes(fill = medhhincome),
-          color = NA, size = 0.05)
+  geom_sf(mapping = aes(fill = cat_var),
+          color = NA, size = 0.05) +
+  labs(fill = "Categorical variable")
 ```
 
 ![](README_files/figure-markdown_github/county-1.png)
@@ -168,7 +177,27 @@ dmv %>%
   labs(fill = "Median household income")
 ```
 
-![](README_files/figure-markdown_github/theme-counties-1.png)
+![](README_files/figure-markdown_github/theme-counties-1.png) A discrete color scale can also be used for categorical data.
+
+``` r
+state_categorical <- statedata %>% 
+  mutate(cat_var = paste0("Group ",
+                          sample(1:4, nrow(statedata), replace = TRUE))) %>% 
+  left_join(get_urbn_map(map = "states", sf = TRUE))
+```
+
+    ## Joining, by = c("state_fips", "state_name")
+
+``` r
+ggplot() +
+  geom_sf(state_categorical, mapping = aes(fill = cat_var),
+          color = "#ffffff") +
+  scale_fill_discrete() +
+  coord_sf(datum = NA) +
+  labs(fill = "Categorical variable")
+```
+
+![](README_files/figure-markdown_github/state-discrete-1.png)
 
 License
 -------
