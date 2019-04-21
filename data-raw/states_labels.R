@@ -60,6 +60,8 @@ states_labels_sf <- states_labels %>%
   # convert to SF
   sf::st_as_sf(coords = c("long", "lat")) %>%
   # set CRS
-  sf::st_set_crs(2163) %>%
+  sf::st_set_crs(4326) %>%
+  # transform CRS
+  sf::st_transform(crs = 2163) %>%
   # add FIPS codes
   left_join(get_state_fips(), by = c("state_name", "state_abbv"))
