@@ -5,16 +5,16 @@ urbnmapr <img src="man/figures/hexsticker.png" align="right" style="width:138.13
 
 [![Travis-CI Build Status](https://travis-ci.org/UrbanInstitute/urbnmapr.svg?branch=master)](https://travis-ci.org/UrbanInstitute/urbnmapr)
 
-The `urbnmapr` package provides state and county shapefiles in `tibble` format that is compatible to map with `ggplot2`.
+The `urbnmapr` package provides state and county shapefiles that are compatible to map with `ggplot2`.
 
-Shapefiles include Alaska and Hawaii, transformed to be displayed as insets within the continental United States.
+Shapefiles include Alaska and Hawaii, transformed to be displayed as insets within the continental United States. There are options to include the territories for both the state and county maps.
 
 This package is heavily inspired by and derived in part from the [fiftystater package](https://cran.r-project.org/package=fiftystater) by William Murphy. In contrast, `urbnmapr`:
 
 -   Uses shapefiles from the US Census Bureau
--   Converts the shapefile data to a `tibble` dataframe
+-   Converts the shapefile data to `sf` format
 -   Adds various identifiers for merging
--   Includes a county-level shapefile
+-   Includes a county-level shapefile and options to add territories
 
 Installation
 ------------
@@ -31,104 +31,96 @@ Usage
 
 ### Quick maps
 
-`urbnmapr` contains two `tibble` dataframes for creating maps:
-
--   `states`
--   `counties`
-
-The `states` and `counties` tibbles can be used with `geom_polygon()` and `coord_map()` to create base maps of the continental United States, with Alaska and Hawaii displayed as insets:
+The `get_urbn_map()` function can be used to call shapefiles. Using the `sf = TRUE` option will load `sf` objects. These can be used with `geom_sf()` to create base maps of the continental United States, with Alaska and Hawaii displayed as insets:
 
 ``` r
 library(tidyverse)
 library(urbnmapr)
 
-states %>%
-  ggplot(aes(long, lat, group = group)) +
-  geom_polygon(fill = "grey", color = "#ffffff", size = 0.25) +
-  coord_map(projection = "albers", lat0 = 39, lat1 = 45)
+states_sf <- get_urbn_map("states", sf = TRUE)
+
+states_sf %>% 
+  ggplot(aes()) +
+  geom_sf(fill = "grey", color = "#ffffff")
 ```
 
-![](README_files/figure-markdown_github/blank-state-1.png)
+![](README_files/figure-markdown_github/sf-state-1.png)
 
 ``` r
-counties %>%
-  ggplot(aes(long, lat, group = group)) +
-  geom_polygon(fill = "grey", color = "#ffffff", size = 0.05) +
-  coord_map(projection = "albers", lat0 = 39, lat1 = 45)
+library(tidyverse)
+library(urbnmapr)
+
+counties_sf <- get_urbn_map("counties", sf = TRUE)
+
+counties_sf %>% 
+  ggplot(aes()) +
+  geom_sf(fill = "grey", color = "#ffffff")
 ```
 
-![](README_files/figure-markdown_github/blank-county-1.png)
+![](README_files/figure-markdown_github/sf-county-1.png)
+
+The default projection is US National Atlas Equal Area.
 
 ### More maps
 
-Additional maps can be accessed with `get_urbn_map()`. Use the function to create a tibble in your global environment and then map using the same syntax as above.
+Maps with US territories can also be called with `get_urbn_map()`.
 
 ``` r
-territories_counties <- get_urbn_map(map = "territories_counties")
+territories_counties <- get_urbn_map(map = "territories_counties", sf = TRUE)
 
-territories_counties %>%
-  ggplot(aes(long, lat, group = group)) +
-  geom_polygon(fill = "grey", color = "#ffffff", size = 0.05) +
-  coord_map(projection = "albers", lat0 = 39, lat1 = 45)
+ggplot() +
+  geom_sf(territories_counties,
+          mapping = aes(),
+          fill = "grey", color = "#ffffff")
 ```
 
-![](README_files/figure-markdown_github/get_urbn_map-1.png)
+![](README_files/figure-markdown_github/terr-1.png)
 
 ### Labels
 
-Labels for all maps can be accessed with `get_urbn_labels()`. Use the function to call the appropriate labels and then label the map with `geom_text()`. Labels can be called inside of `geom_text()`:
+Labels for all maps can be accessed with `get_urbn_labels()`. Only state labels are custom, so they can be displayed next to smaller states. Use the function to call the appropriate labels and then label the map with `geom_text()`. Labels can be called inside of `geom_text()`:
 
 ``` r
-states %>%
+states_sf <- get_urbn_map(map = "states", sf = TRUE)
+
+states_sf %>%
   ggplot() +
-  geom_polygon(aes(long, lat, group = group), 
-               fill = "grey", color = "#ffffff", size = 0.25) +
-  coord_map(projection = "albers", lat0 = 39, lat1 = 45) +
-  geom_text(data = get_urbn_labels(map = "states"), aes(x = long, lat, label = state_abbv), 
+  geom_sf(aes(), 
+          fill = "grey", color = "#ffffff", size = 0.25) +
+  geom_sf_text(data = get_urbn_labels(map = "states", sf = TRUE), 
+                aes(label = state_abbv), 
             size = 3)
 ```
 
 ![](README_files/figure-markdown_github/quick-labels-1.png)
 
-Or before `geom_text()` is called:
-
-``` r
-territories <- get_urbn_map(map = "territories")
-labels <- get_urbn_labels(map = "territories")
-
-territories %>%
-  ggplot() +
-  geom_polygon(aes(long, lat, group = group),
-               fill = "grey", color = "#ffffff", size = 0.05) +
-  coord_map(projection = "albers", lat0 = 39, lat1 = 45) +
-  geom_text(data = labels, aes(x = long, lat, label = state_abbv), size = 3) 
-```
-
-![](README_files/figure-markdown_github/get_urbn_labels-1.png)
-
 Merging Data
 ------------
 
-The `states` and `counties` tibbles include various identifiers to simplify merging data. The states `states` tibble contains `state_fips`, `state_abbv`, and `state_name`. The `counties` tibble contains `county_fips`, `state_abbv`, `state_fips`, `county_name`, and `state_name`. Both tibbles can be piped into `ggplot2` to create a choropleth map.
+The states and counties spatial data include various identifiers to simplify merging data. The states `states` tibble contains `state_fips`, `state_abbv`, and `state_name`. The `counties` tibble contains `county_fips`, `state_abbv`, `state_fips`, `county_name`, and `state_name`.
 
 ``` r
-statedata %>% 
-  left_join(states, by = "state_name") %>% 
-  ggplot(mapping = aes(long, lat, group = group, fill = horate)) +
-  geom_polygon(color = "#ffffff", size = .25) +
-  coord_map(projection = "albers", lat0 = 39, lat1 = 45) +
+spatial_data <- left_join(statedata,
+                          get_urbn_map(map = "states", sf = TRUE),
+                          by = "state_name")
+
+ggplot() +
+  geom_sf(spatial_data,
+          mapping = aes(fill = horate),
+          color = "#ffffff", size = .25) +
   labs(fill = "Homeownership rate")
 ```
 
 ![](README_files/figure-markdown_github/us-choropleth-1.png)
 
 ``` r
-household_data <- left_join(countydata, counties, by = "county_fips") 
+counties_sf <- get_urbn_map(map = "counties", sf = TRUE)
+household_data <- left_join(countydata, counties_sf, by = "county_fips")
 
 household_data %>%
-  ggplot(aes(long, lat, group = group, fill = medhhincome)) +
-    geom_polygon(color = "#ffffff", size = 0.05) +
-    coord_map(projection = "albers", lat0 = 39, lat1 = 45)
+  ggplot() +
+  geom_sf(mapping = aes(fill = medhhincome),
+          color = NA, size = 0.05)
 ```
 
 ![](README_files/figure-markdown_github/county-1.png)
@@ -145,23 +137,33 @@ set_urbn_defaults(style = "map")
 ```
 
 ``` r
+states_sf <- get_urbn_map(map = "states", sf = TRUE)
+
 statedata %>% 
-  left_join(states, by = "state_name") %>% 
-  ggplot(mapping = aes(long, lat, group = group, fill = horate)) +
-  geom_polygon(color = "#ffffff", size = .25) +
-  coord_map(projection = "albers", lat0 = 39, lat1 = 45) +
+  left_join(states_sf, by = "state_name") %>% 
+  ggplot() +
+  geom_sf(mapping = aes(fill = horate),
+          color = "#ffffff", size = .25) +
   scale_fill_gradientn(labels = scales::percent) +
-  labs(fill = "Homeownership rate")
+  labs(fill = "Homeownership rate") +
+  coord_sf(datum = NA)
 ```
 
 ![](README_files/figure-markdown_github/theme-state-1.png)
 
+Map smaller geographies with `filter()`. You may need to reproject the data based on which areas you are mapping.
+
 ``` r
-household_data %>%
+dmv <- household_data %>% 
+  sf::st_as_sf() %>% 
+  sf::st_transform(crs = 4326)
+
+dmv %>%
   filter(state_name %in% c("Virginia", "Maryland", "District of Columbia")) %>%
-  ggplot(aes(long, lat, group = group, fill = medhhincome)) +
-    geom_polygon(color = "#ffffff", size = 0.05) +
-    coord_map(projection = "albers", lat0 = 39, lat1 = 45) +
+  ggplot() +
+    geom_sf(mapping = aes(fill = medhhincome),
+                 color = "#ffffff", size = 0.05) +
+    coord_sf(crs = 4326, datum = NA) +
     scale_fill_gradientn(labels = scales::dollar) +
   labs(fill = "Median household income")
 ```
