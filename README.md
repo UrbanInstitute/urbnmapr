@@ -78,7 +78,7 @@ ggplot() +
 
 ### Labels
 
-Labels for all maps can be accessed with `get_urbn_labels()`. Only state labels are custom, so they can be displayed next to smaller states. Use the function to call the appropriate labels and then label the map with `geom_text()`. Labels can be called inside of `geom_text()`:
+Labels for states maps can be accessed with `get_urbn_labels()`. Only state labels are custom, so they can be displayed next to smaller states. Use the function to call the appropriate labels and then label the map with `geom_sf_text()`.
 
 ``` r
 states_sf <- get_urbn_map(map = "states", sf = TRUE)
@@ -177,18 +177,17 @@ dmv %>%
   labs(fill = "Median household income")
 ```
 
-![](README_files/figure-markdown_github/theme-counties-1.png) A discrete color scale can also be used for categorical data.
+![](README_files/figure-markdown_github/theme-counties-1.png)
+
+A discrete color scale can also be used for categorical data.
 
 ``` r
 state_categorical <- statedata %>% 
   mutate(cat_var = paste0("Group ",
                           sample(1:4, nrow(statedata), replace = TRUE))) %>% 
-  left_join(get_urbn_map(map = "states", sf = TRUE))
-```
+  left_join(get_urbn_map(map = "states", sf = TRUE), by = "state_name")
 
-    ## Joining, by = c("state_fips", "state_name")
 
-``` r
 ggplot() +
   geom_sf(state_categorical, mapping = aes(fill = cat_var),
           color = "#ffffff") +
