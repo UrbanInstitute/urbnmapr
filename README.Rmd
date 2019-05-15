@@ -110,7 +110,7 @@ spatial_data <- left_join(statedata,
 ggplot() +
   geom_sf(spatial_data,
           mapping = aes(fill = horate),
-          color = "#ffffff", size = .25) +
+          color = "#ffffff", size = 0.25) +
   labs(fill = "Homeownership rate")
   
 ```
@@ -151,7 +151,7 @@ statedata %>%
   left_join(states_sf, by = "state_name") %>% 
   ggplot() +
   geom_sf(mapping = aes(fill = horate),
-          color = "#ffffff", size = .25) +
+          color = "#ffffff", size = 0.25) +
   scale_fill_gradientn(labels = scales::percent) +
   labs(fill = "Homeownership rate") +
   coord_sf(datum = NA)
