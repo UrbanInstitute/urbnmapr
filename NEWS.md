@@ -1,3 +1,8 @@
+## urbnmapr 0.0.0.9002
+
+* Adds `SF` option to `get_urbn_map()` and `get_urbn_label()`
+* Add [pkgdown](https://github.com/r-lib/pkgdown) website [here](https://urbaninstitute.github.io/urbnmapr/)
+
 ## urbnmapr 0.0.0.9001
 
 Two functions have been added to the package, with two additional shape 

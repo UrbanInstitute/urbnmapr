@@ -15,5 +15,5 @@ get_urbn_labels(map = "states", sf = FALSE)
 \code{get_urbn_labels()} loads labels and coordinates for maps from the \code{get_urbn_map()} functions.
 Note: there are currently only \code{sf} options for \code{states} and \code{territories_states}, as
 these are the only options that have custom labels. To label \code{counties} and \code{territories_counties},
-use \code{geom_sf_text()} or \code{geom__sf_label()}.
+use \code{geom_sf_text()} or \code{geom_sf_label()}.
 }
