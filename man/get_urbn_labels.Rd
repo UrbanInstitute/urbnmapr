@@ -2,13 +2,18 @@
 % Please edit documentation in R/get_urbn_labels.R
 \name{get_urbn_labels}
 \alias{get_urbn_labels}
-\title{Import different maps}
+\title{Import different map labels.}
 \usage{
-get_urbn_labels(map = "states")
+get_urbn_labels(map = "states", sf = FALSE)
 }
 \arguments{
 \item{map}{Selection of custom labels. Current options are \code{"states"}, \code{"counties"}, \code{"ccdf"}, \code{"territories"}, and \code{"territories_counties"}.}
+
+\item{sf}{Option indicates whether data is loaded as a \code{tibble()} or an \code{sf} object}
 }
 \description{
 \code{get_urbn_labels()} loads labels and coordinates for maps from the \code{get_urbn_map()} functions.
+Note: there are currently only \code{sf} options for \code{states} and \code{territories_states}, as
+these are the only options that have custom labels. To label \code{counties} and \code{territories_counties},
+use \code{geom_sf_text()} or \code{geom_sf_label()}.
 }

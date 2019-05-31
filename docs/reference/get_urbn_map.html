@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">urbnmapr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9002</span>
       </span>
     </div>
 
@@ -125,14 +125,18 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_urbn_map</span>(<span class='kw'>map</span> <span class='kw'>=</span> <span class='st'>"states"</span>)</pre>
+    <pre class="usage"><span class='fu'>get_urbn_map</span>(<span class='kw'>map</span> <span class='kw'>=</span> <span class='st'>"states"</span>, <span class='kw'>sf</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>map</th>
-      <td><p>Selection of custom map. Current options are <code>"states"</code>, <code>"counties"</code>, <code>"ccdf"</code>, <code>"territories"</code>, and <code>"territories_counties"</code>.</p></td>
+      <td><p>Selection of custom map. Current options are <code>"states"</code>, <code>"counties"</code>, <code>"ccdf"</code>, <code>"territories_states"</code>, and <code>"territories_counties"</code>.</p></td>
+    </tr>
+    <tr>
+      <th>sf</th>
+      <td><p>Option indicates whether data is loaded as a <code>tibble()</code> or an <code>sf</code> object</p></td>
     </tr>
     </table>
     

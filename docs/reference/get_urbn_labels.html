@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Import different maps — get_urbn_labels • urbnmapr</title>
+<title>Import different map labels. — get_urbn_labels • urbnmapr</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,12 @@
 
 
 
-<meta property="og:title" content="Import different maps — get_urbn_labels" />
+<meta property="og:title" content="Import different map labels. — get_urbn_labels" />
 
-<meta property="og:description" content="get_urbn_labels() loads labels and coordinates for maps from the get_urbn_map() functions." />
+<meta property="og:description" content="get_urbn_labels() loads labels and coordinates for maps from the get_urbn_map() functions.
+Note: there are currently only sf options for states and territories_states, as
+these are the only options that have custom labels. To label counties and territories_counties,
+use geom_sf_text() or geom_sf_label()." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -63,7 +66,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">urbnmapr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9002</span>
       </span>
     </div>
 
@@ -114,18 +117,21 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Import different maps</h1>
+    <h1>Import different map labels.</h1>
     <small class="dont-index">Source: <a href='https://github.com/UrbanInstitute/urbnmapr/blob/master/R/get_urbn_labels.R'><code>R/get_urbn_labels.R</code></a></small>
     <div class="hidden name"><code>get_urbn_labels.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>get_urbn_labels()</code> loads labels and coordinates for maps from the <code><a href='get_urbn_map.html'>get_urbn_map()</a></code> functions.</p>
+    <p><code>get_urbn_labels()</code> loads labels and coordinates for maps from the <code><a href='get_urbn_map.html'>get_urbn_map()</a></code> functions.
+Note: there are currently only <code>sf</code> options for <code>states</code> and <code>territories_states</code>, as
+these are the only options that have custom labels. To label <code>counties</code> and <code>territories_counties</code>,
+use <code>geom_sf_text()</code> or <code>geom_sf_label()</code>.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_urbn_labels</span>(<span class='kw'>map</span> <span class='kw'>=</span> <span class='st'>"states"</span>)</pre>
+    <pre class="usage"><span class='fu'>get_urbn_labels</span>(<span class='kw'>map</span> <span class='kw'>=</span> <span class='st'>"states"</span>, <span class='kw'>sf</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -133,6 +139,10 @@
     <tr>
       <th>map</th>
       <td><p>Selection of custom labels. Current options are <code>"states"</code>, <code>"counties"</code>, <code>"ccdf"</code>, <code>"territories"</code>, and <code>"territories_counties"</code>.</p></td>
+    </tr>
+    <tr>
+      <th>sf</th>
+      <td><p>Option indicates whether data is loaded as a <code>tibble()</code> or an <code>sf</code> object</p></td>
     </tr>
     </table>
     

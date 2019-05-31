@@ -4,10 +4,12 @@
 \alias{get_urbn_map}
 \title{Import different maps}
 \usage{
-get_urbn_map(map = "states")
+get_urbn_map(map = "states", sf = FALSE)
 }
 \arguments{
-\item{map}{Selection of custom map. Current options are \code{"states"}, \code{"counties"}, \code{"ccdf"}, \code{"territories"}, and \code{"territories_counties"}.}
+\item{map}{Selection of custom map. Current options are \code{"states"}, \code{"counties"}, \code{"ccdf"}, \code{"territories_states"}, and \code{"territories_counties"}.}
+
+\item{sf}{Option indicates whether data is loaded as a \code{tibble()} or an \code{sf} object}
 }
 \description{
 \code{get_urbn_map()} loads maps that are different than \code{states} and \code{counties}

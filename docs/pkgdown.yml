@@ -1,6 +1,6 @@
-pandoc: 2.7.2
+pandoc: 1.19.2.1
 pkgdown: 1.3.0
 pkgdown_sha: ~
 articles:
-  introducing-urbnmapr: ../../../../../../../K:/Ibp/AWilliams/R/urbnmapr/vignettes/introducing-urbnmapr.html
+  introducing-urbnmapr: introducing-urbnmapr.html
 
