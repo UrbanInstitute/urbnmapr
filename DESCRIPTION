@@ -31,5 +31,5 @@ BugReports: https://github.com/UrbanInstitute/urbnmapr/issues
 LazyData: true
 License: GPL-3
 Encoding: UTF-8
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
 VignetteBuilder: knitr
