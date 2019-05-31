@@ -162,16 +162,12 @@ Map smaller geographies with `filter()`. You may need to reproject the data base
 
 ```{r theme-counties}
 
-dmv <- household_data %>% 
-  sf::st_as_sf() %>% 
-  sf::st_transform(crs = 4326)
-
-dmv %>%
-  filter(state_name %in% c("Virginia", "Maryland", "District of Columbia")) %>%
+household_data %>%
+  filter(state_name == "California") %>%
   ggplot() +
     geom_sf(mapping = aes(fill = medhhincome),
                  color = "#ffffff", size = 0.05) +
-    coord_sf(crs = 4326, datum = NA) +
+    coord_sf(datum = NA) +
     scale_fill_gradientn(labels = scales::dollar) +
   labs(fill = "Median household income")
 ```
