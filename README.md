@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-urbnmapr <img src="man/figures/hexsticker.png" align="right" style="width:138.1334px;height:160px;"/>
-=====================================================================================================
+urbnmapr <a href="https://urbaninstitute.github.io/urbnmapr/"><img src="man/figures/hexsticker.png" align="right" height="160"/></a>
+====================================================================================================================================
 
 [![Travis-CI Build Status](https://travis-ci.org/UrbanInstitute/urbnmapr.svg?branch=master)](https://travis-ci.org/UrbanInstitute/urbnmapr)
 
@@ -15,6 +15,11 @@ This package is heavily inspired by and derived in part from the [fiftystater pa
 -   Converts the shapefile data to `sf` format
 -   Adds various identifiers for merging
 -   Includes a county-level shapefile and options to add territories
+
+Stay up-to-date
+---------------
+
+Sign up [here](https://app.smartsheet.com/b/form/9029a0a8254e4044a52cdebaebe343bf) to stay up-to-date with R package releases and R resources from the Urban Institute. We will not share your information and we will not email more than once per month.
 
 Installation
 ------------

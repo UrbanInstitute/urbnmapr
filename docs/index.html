@@ -90,7 +90,7 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <div id="urbnmapr" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#urbnmapr" class="anchor"></a>urbnmapr <img src="reference/figures/hexsticker.png" align="right" style="width:138.1334px;height:160px;">
+<a href="#urbnmapr" class="anchor"></a>urbnmapr <a href="https://urbaninstitute.github.io/urbnmapr/"><img src="reference/figures/hexsticker.png" align="right" height="160"></a>
 </h1></div>
 
 <p>The <code>urbnmapr</code> package provides state and county shapefiles that are compatible to map with <code>ggplot2</code>.</p>
@@ -102,12 +102,17 @@
 <li>Adds various identifiers for merging</li>
 <li>Includes a county-level shapefile and options to add territories</li>
 </ul>
+<div id="stay-up-to-date" class="section level2">
+<h2 class="hasAnchor">
+<a href="#stay-up-to-date" class="anchor"></a>Stay up-to-date</h2>
+<p>Sign up <a href="https://app.smartsheet.com/b/form/9029a0a8254e4044a52cdebaebe343bf">here</a> to stay up-to-date with R package releases and R resources from the Urban Institute. We will not share your information and we will not email more than once per month.</p>
+</div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install the latest version of <code>urbnmapr</code> from GitHub:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># install.packages("devtools")</span></a>
-<a class="sourceLine" id="cb1-2" title="2">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"UrbanInstitute/urbnmapr"</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("devtools")</span>
+devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"UrbanInstitute/urbnmapr"</span>)</code></pre></div>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
@@ -116,23 +121,23 @@
 <h3 class="hasAnchor">
 <a href="#quick-maps" class="anchor"></a>Quick maps</h3>
 <p>The <code><a href="reference/get_urbn_map.html">get_urbn_map()</a></code> function can be used to call shapefiles. Using the <code>sf = TRUE</code> option will load <code>sf</code> objects. These can be used with <code>geom_sf()</code> to create base maps of the continental United States, with Alaska and Hawaii displayed as insets:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tidyverse)</a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(urbnmapr)</a>
-<a class="sourceLine" id="cb2-3" title="3"></a>
-<a class="sourceLine" id="cb2-4" title="4">states_sf &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_urbn_map.html">get_urbn_map</a></span>(<span class="st">"states"</span>, <span class="dt">sf =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb2-5" title="5"></a>
-<a class="sourceLine" id="cb2-6" title="6">states_sf <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb2-7" title="7"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>()) <span class="op">+</span></a>
-<a class="sourceLine" id="cb2-8" title="8"><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">fill =</span> <span class="st">"grey"</span>, <span class="dt">color =</span> <span class="st">"#ffffff"</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tidyverse)
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(urbnmapr)
+
+states_sf &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_urbn_map.html">get_urbn_map</a></span>(<span class="st">"states"</span>, <span class="dt">sf =</span> <span class="ot">TRUE</span>)
+
+states_sf <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>()) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">fill =</span> <span class="st">"grey"</span>, <span class="dt">color =</span> <span class="st">"#ffffff"</span>)</code></pre></div>
 <p><img src="index_files/figure-html/sf-state-1.png" width="700"></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tidyverse)</a>
-<a class="sourceLine" id="cb3-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(urbnmapr)</a>
-<a class="sourceLine" id="cb3-3" title="3"></a>
-<a class="sourceLine" id="cb3-4" title="4">counties_sf &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_urbn_map.html">get_urbn_map</a></span>(<span class="st">"counties"</span>, <span class="dt">sf =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb3-5" title="5"></a>
-<a class="sourceLine" id="cb3-6" title="6">counties_sf <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb3-7" title="7"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>()) <span class="op">+</span></a>
-<a class="sourceLine" id="cb3-8" title="8"><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">fill =</span> <span class="st">"grey"</span>, <span class="dt">color =</span> <span class="st">"#ffffff"</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tidyverse)
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(urbnmapr)
+
+counties_sf &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_urbn_map.html">get_urbn_map</a></span>(<span class="st">"counties"</span>, <span class="dt">sf =</span> <span class="ot">TRUE</span>)
+
+counties_sf <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>()) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">fill =</span> <span class="st">"grey"</span>, <span class="dt">color =</span> <span class="st">"#ffffff"</span>)</code></pre></div>
 <p><img src="index_files/figure-html/sf-county-1.png" width="700"></p>
 <p>The default projection is US National Atlas Equal Area.</p>
 </div>
@@ -140,27 +145,27 @@
 <h3 class="hasAnchor">
 <a href="#more-maps" class="anchor"></a>More maps</h3>
 <p>Maps with US territories can also be called with <code><a href="reference/get_urbn_map.html">get_urbn_map()</a></code>.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">territories_counties &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_urbn_map.html">get_urbn_map</a></span>(<span class="dt">map =</span> <span class="st">"territories_counties"</span>, <span class="dt">sf =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb4-2" title="2"></a>
-<a class="sourceLine" id="cb4-3" title="3"><span class="kw">ggplot</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb4-4" title="4"><span class="st">  </span><span class="kw">geom_sf</span>(territories_counties,</a>
-<a class="sourceLine" id="cb4-5" title="5">          <span class="dt">mapping =</span> <span class="kw">aes</span>(),</a>
-<a class="sourceLine" id="cb4-6" title="6">          <span class="dt">fill =</span> <span class="st">"grey"</span>, <span class="dt">color =</span> <span class="st">"#ffffff"</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">territories_counties &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_urbn_map.html">get_urbn_map</a></span>(<span class="dt">map =</span> <span class="st">"territories_counties"</span>, <span class="dt">sf =</span> <span class="ot">TRUE</span>)
+
+<span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_sf</span>(territories_counties,
+          <span class="dt">mapping =</span> <span class="kw">aes</span>(),
+          <span class="dt">fill =</span> <span class="st">"grey"</span>, <span class="dt">color =</span> <span class="st">"#ffffff"</span>)</code></pre></div>
 <p><img src="index_files/figure-html/terr-1.png" width="700"></p>
 </div>
 <div id="labels" class="section level3">
 <h3 class="hasAnchor">
 <a href="#labels" class="anchor"></a>Labels</h3>
 <p>Labels for states maps can be accessed with <code><a href="reference/get_urbn_labels.html">get_urbn_labels()</a></code>. Only state labels are custom, so they can be displayed next to smaller states. Use the function to call the appropriate labels and then label the map with <code>geom_sf_text()</code>.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">states_sf &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_urbn_map.html">get_urbn_map</a></span>(<span class="dt">map =</span> <span class="st">"states"</span>, <span class="dt">sf =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb5-2" title="2"></a>
-<a class="sourceLine" id="cb5-3" title="3">states_sf <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb5-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb5-5" title="5"><span class="st">  </span><span class="kw">geom_sf</span>(<span class="kw">aes</span>(), </a>
-<a class="sourceLine" id="cb5-6" title="6">          <span class="dt">fill =</span> <span class="st">"grey"</span>, <span class="dt">color =</span> <span class="st">"#ffffff"</span>, <span class="dt">size =</span> <span class="fl">0.25</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb5-7" title="7"><span class="st">  </span><span class="kw">geom_sf_text</span>(<span class="dt">data =</span> <span class="kw"><a href="reference/get_urbn_labels.html">get_urbn_labels</a></span>(<span class="dt">map =</span> <span class="st">"states"</span>, <span class="dt">sf =</span> <span class="ot">TRUE</span>), </a>
-<a class="sourceLine" id="cb5-8" title="8">                <span class="kw">aes</span>(<span class="dt">label =</span> state_abbv), </a>
-<a class="sourceLine" id="cb5-9" title="9">            <span class="dt">size =</span> <span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">states_sf &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_urbn_map.html">get_urbn_map</a></span>(<span class="dt">map =</span> <span class="st">"states"</span>, <span class="dt">sf =</span> <span class="ot">TRUE</span>)
+
+states_sf <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_sf</span>(<span class="kw">aes</span>(), 
+          <span class="dt">fill =</span> <span class="st">"grey"</span>, <span class="dt">color =</span> <span class="st">"#ffffff"</span>, <span class="dt">size =</span> <span class="fl">0.25</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_sf_text</span>(<span class="dt">data =</span> <span class="kw"><a href="reference/get_urbn_labels.html">get_urbn_labels</a></span>(<span class="dt">map =</span> <span class="st">"states"</span>, <span class="dt">sf =</span> <span class="ot">TRUE</span>), 
+                <span class="kw">aes</span>(<span class="dt">label =</span> state_abbv), 
+            <span class="dt">size =</span> <span class="dv">3</span>)</code></pre></div>
 <p><img src="index_files/figure-html/quick-labels-1.png" width="700"></p>
 </div>
 </div>
@@ -169,76 +174,72 @@
 <a href="#merging-data" class="anchor"></a>Merging Data</h2>
 <p>The states and counties spatial data include various identifiers to simplify merging data. The states <code>states</code> tibble contains <code>state_fips</code>, <code>state_abbv</code>, and <code>state_name</code>. The <code>counties</code> tibble contains <code>county_fips</code>, <code>state_abbv</code>, <code>state_fips</code>, <code>county_name</code>, and <code>state_name</code>.</p>
 <p>Continuous data can be mapping on a color scale.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">spatial_data &lt;-<span class="st"> </span><span class="kw">left_join</span>(statedata,</a>
-<a class="sourceLine" id="cb6-2" title="2">                          <span class="kw"><a href="reference/get_urbn_map.html">get_urbn_map</a></span>(<span class="dt">map =</span> <span class="st">"states"</span>, <span class="dt">sf =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb6-3" title="3">                          <span class="dt">by =</span> <span class="st">"state_name"</span>)</a>
-<a class="sourceLine" id="cb6-4" title="4"></a>
-<a class="sourceLine" id="cb6-5" title="5"><span class="kw">ggplot</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb6-6" title="6"><span class="st">  </span><span class="kw">geom_sf</span>(spatial_data,</a>
-<a class="sourceLine" id="cb6-7" title="7">          <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">fill =</span> horate),</a>
-<a class="sourceLine" id="cb6-8" title="8">          <span class="dt">color =</span> <span class="st">"#ffffff"</span>, <span class="dt">size =</span> <span class="fl">0.25</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb6-9" title="9"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">fill =</span> <span class="st">"Homeownership rate"</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">spatial_data &lt;-<span class="st"> </span><span class="kw">left_join</span>(statedata,
+                          <span class="kw"><a href="reference/get_urbn_map.html">get_urbn_map</a></span>(<span class="dt">map =</span> <span class="st">"states"</span>, <span class="dt">sf =</span> <span class="ot">TRUE</span>),
+                          <span class="dt">by =</span> <span class="st">"state_name"</span>)
+
+<span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_sf</span>(spatial_data,
+          <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">fill =</span> horate),
+          <span class="dt">color =</span> <span class="st">"#ffffff"</span>, <span class="dt">size =</span> <span class="fl">0.25</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">fill =</span> <span class="st">"Homeownership rate"</span>)</code></pre></div>
 <p><img src="index_files/figure-html/us-choropleth-1.png" width="700"></p>
 <p>Categorical data can be mapped on a discrete color scale.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">counties_sf &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_urbn_map.html">get_urbn_map</a></span>(<span class="dt">map =</span> <span class="st">"counties"</span>, <span class="dt">sf =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb7-2" title="2">county_groups &lt;-<span class="st"> </span>countydata <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb7-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">cat_var =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste0</a></span>(<span class="st">"Group "</span>,</a>
-<a class="sourceLine" id="cb7-4" title="4">                          <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sample">sample</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/nrow">nrow</a></span>(countydata), <span class="dt">replace =</span> <span class="ot">TRUE</span>)))</a>
-<a class="sourceLine" id="cb7-5" title="5"></a>
-<a class="sourceLine" id="cb7-6" title="6">household_data &lt;-<span class="st"> </span><span class="kw">left_join</span>(county_groups, counties_sf, <span class="dt">by =</span> <span class="st">"county_fips"</span>)</a>
-<a class="sourceLine" id="cb7-7" title="7"></a>
-<a class="sourceLine" id="cb7-8" title="8">household_data <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb7-9" title="9"><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb7-10" title="10"><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">fill =</span> cat_var),</a>
-<a class="sourceLine" id="cb7-11" title="11">          <span class="dt">color =</span> <span class="ot">NA</span>, <span class="dt">size =</span> <span class="fl">0.05</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb7-12" title="12"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">fill =</span> <span class="st">"Categorical variable"</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">counties_sf &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_urbn_map.html">get_urbn_map</a></span>(<span class="dt">map =</span> <span class="st">"counties"</span>, <span class="dt">sf =</span> <span class="ot">TRUE</span>)
+county_groups &lt;-<span class="st"> </span>countydata <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">cat_var =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste0</a></span>(<span class="st">"Group "</span>,
+                          <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sample">sample</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/nrow">nrow</a></span>(countydata), <span class="dt">replace =</span> <span class="ot">TRUE</span>)))
+
+household_data &lt;-<span class="st"> </span><span class="kw">left_join</span>(county_groups, counties_sf, <span class="dt">by =</span> <span class="st">"county_fips"</span>)
+
+household_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">fill =</span> cat_var),
+          <span class="dt">color =</span> <span class="ot">NA</span>, <span class="dt">size =</span> <span class="fl">0.05</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">fill =</span> <span class="st">"Categorical variable"</span>)</code></pre></div>
 <p><img src="index_files/figure-html/county-1.png" width="700"></p>
 </div>
 <div id="styles" class="section level2">
 <h2 class="hasAnchor">
 <a href="#styles" class="anchor"></a>Styles</h2>
 <p><code><a href="https://www.rdocumentation.org/packages/base/topics/library">library(urbnmapr)</a></code> works well with the <a href="https://github.com/UrbanInstitute/urban_R_theme">Urban Institute <code>ggplot2</code> theme.</a></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(urbnthemes)</a>
-<a class="sourceLine" id="cb8-2" title="2"></a>
-<a class="sourceLine" id="cb8-3" title="3"><span class="kw">set_urbn_defaults</span>(<span class="dt">style =</span> <span class="st">"map"</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">states_sf &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_urbn_map.html">get_urbn_map</a></span>(<span class="dt">map =</span> <span class="st">"states"</span>, <span class="dt">sf =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb9-2" title="2"></a>
-<a class="sourceLine" id="cb9-3" title="3">statedata <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb9-4" title="4"><span class="st">  </span><span class="kw">left_join</span>(states_sf, <span class="dt">by =</span> <span class="st">"state_name"</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb9-5" title="5"><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb9-6" title="6"><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">fill =</span> horate),</a>
-<a class="sourceLine" id="cb9-7" title="7">          <span class="dt">color =</span> <span class="st">"#ffffff"</span>, <span class="dt">size =</span> <span class="fl">0.25</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb9-8" title="8"><span class="st">  </span><span class="kw">scale_fill_gradientn</span>(<span class="dt">labels =</span> scales<span class="op">::</span>percent) <span class="op">+</span></a>
-<a class="sourceLine" id="cb9-9" title="9"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">fill =</span> <span class="st">"Homeownership rate"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb9-10" title="10"><span class="st">  </span><span class="kw">coord_sf</span>(<span class="dt">datum =</span> <span class="ot">NA</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(urbnthemes)
+
+<span class="kw"><a href="https://www.rdocumentation.org/packages/urbnthemes/topics/set_urbn_defaults">set_urbn_defaults</a></span>(<span class="dt">style =</span> <span class="st">"map"</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">states_sf &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_urbn_map.html">get_urbn_map</a></span>(<span class="dt">map =</span> <span class="st">"states"</span>, <span class="dt">sf =</span> <span class="ot">TRUE</span>)
+
+statedata <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">left_join</span>(states_sf, <span class="dt">by =</span> <span class="st">"state_name"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">fill =</span> horate),
+          <span class="dt">color =</span> <span class="st">"#ffffff"</span>, <span class="dt">size =</span> <span class="fl">0.25</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/urbnthemes/topics/scale_fill_gradientn">scale_fill_gradientn</a></span>(<span class="dt">labels =</span> scales<span class="op">::</span>percent) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">fill =</span> <span class="st">"Homeownership rate"</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_sf</span>(<span class="dt">datum =</span> <span class="ot">NA</span>)</code></pre></div>
 <p><img src="index_files/figure-html/theme-state-1.png" width="700"></p>
 <p>Map smaller geographies with <code><a href="https://www.rdocumentation.org/packages/stats/topics/filter">filter()</a></code>. You may need to reproject the data based on which areas you are mapping.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">dmv &lt;-<span class="st"> </span>household_data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb10-2" title="2"><span class="st">  </span>sf<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/sf/topics/st_as_sf">st_as_sf</a></span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb10-3" title="3"><span class="st">  </span>sf<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/sf/topics/st_transform">st_transform</a></span>(<span class="dt">crs =</span> <span class="dv">4326</span>)</a>
-<a class="sourceLine" id="cb10-4" title="4"></a>
-<a class="sourceLine" id="cb10-5" title="5">dmv <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb10-6" title="6"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/filter">filter</a></span>(state_name <span class="op">%in%</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"Virginia"</span>, <span class="st">"Maryland"</span>, <span class="st">"District of Columbia"</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb10-7" title="7"><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb10-8" title="8"><span class="st">    </span><span class="kw">geom_sf</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">fill =</span> medhhincome),</a>
-<a class="sourceLine" id="cb10-9" title="9">                 <span class="dt">color =</span> <span class="st">"#ffffff"</span>, <span class="dt">size =</span> <span class="fl">0.05</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb10-10" title="10"><span class="st">    </span><span class="kw">coord_sf</span>(<span class="dt">crs =</span> <span class="dv">4326</span>, <span class="dt">datum =</span> <span class="ot">NA</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb10-11" title="11"><span class="st">    </span><span class="kw">scale_fill_gradientn</span>(<span class="dt">labels =</span> scales<span class="op">::</span>dollar) <span class="op">+</span></a>
-<a class="sourceLine" id="cb10-12" title="12"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">fill =</span> <span class="st">"Median household income"</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">household_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/filter">filter</a></span>(state_name <span class="op">==</span><span class="st"> "California"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_sf</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">fill =</span> medhhincome),
+                 <span class="dt">color =</span> <span class="st">"#ffffff"</span>, <span class="dt">size =</span> <span class="fl">0.05</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">coord_sf</span>(<span class="dt">datum =</span> <span class="ot">NA</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw"><a href="https://www.rdocumentation.org/packages/urbnthemes/topics/scale_fill_gradientn">scale_fill_gradientn</a></span>(<span class="dt">labels =</span> scales<span class="op">::</span>dollar) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">fill =</span> <span class="st">"Median household income"</span>)</code></pre></div>
 <p><img src="index_files/figure-html/theme-counties-1.png" width="700"></p>
 <p>A discrete color scale can also be used for categorical data.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">state_categorical &lt;-<span class="st"> </span>statedata <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb11-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">cat_var =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste0</a></span>(<span class="st">"Group "</span>,</a>
-<a class="sourceLine" id="cb11-3" title="3">                          <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sample">sample</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/nrow">nrow</a></span>(statedata), <span class="dt">replace =</span> <span class="ot">TRUE</span>))) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb11-4" title="4"><span class="st">  </span><span class="kw">left_join</span>(<span class="kw"><a href="reference/get_urbn_map.html">get_urbn_map</a></span>(<span class="dt">map =</span> <span class="st">"states"</span>, <span class="dt">sf =</span> <span class="ot">TRUE</span>), <span class="dt">by =</span> <span class="st">"state_name"</span>)</a>
-<a class="sourceLine" id="cb11-5" title="5"></a>
-<a class="sourceLine" id="cb11-6" title="6"></a>
-<a class="sourceLine" id="cb11-7" title="7"><span class="kw">ggplot</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb11-8" title="8"><span class="st">  </span><span class="kw">geom_sf</span>(state_categorical, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">fill =</span> cat_var),</a>
-<a class="sourceLine" id="cb11-9" title="9">          <span class="dt">color =</span> <span class="st">"#ffffff"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb11-10" title="10"><span class="st">  </span><span class="kw">scale_fill_discrete</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb11-11" title="11"><span class="st">  </span><span class="kw">coord_sf</span>(<span class="dt">datum =</span> <span class="ot">NA</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb11-12" title="12"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">fill =</span> <span class="st">"Categorical variable"</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">state_categorical &lt;-<span class="st"> </span>statedata <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">cat_var =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste0</a></span>(<span class="st">"Group "</span>,
+                          <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sample">sample</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/nrow">nrow</a></span>(statedata), <span class="dt">replace =</span> <span class="ot">TRUE</span>))) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">left_join</span>(<span class="kw"><a href="reference/get_urbn_map.html">get_urbn_map</a></span>(<span class="dt">map =</span> <span class="st">"states"</span>, <span class="dt">sf =</span> <span class="ot">TRUE</span>), <span class="dt">by =</span> <span class="st">"state_name"</span>)
+
+
+<span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_sf</span>(state_categorical, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">fill =</span> cat_var),
+          <span class="dt">color =</span> <span class="st">"#ffffff"</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/urbnthemes/topics/scale_fill_discrete">scale_fill_discrete</a></span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_sf</span>(<span class="dt">datum =</span> <span class="ot">NA</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">fill =</span> <span class="st">"Categorical variable"</span>)</code></pre></div>
 <p><img src="index_files/figure-html/state-discrete-1.png" width="700"></p>
 </div>
 <div id="license" class="section level2">

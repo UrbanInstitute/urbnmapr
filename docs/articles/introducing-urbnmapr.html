@@ -83,7 +83,7 @@
       <h1>Introducing urbnmapr</h1>
                         <h4 class="author">Vignette Author</h4>
             
-            <h4 class="date">2019-05-15</h4>
+            <h4 class="date">2019-05-31</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/UrbanInstitute/urbnmapr/blob/master/vignettes/introducing-urbnmapr.Rmd"><code>vignettes/introducing-urbnmapr.Rmd</code></a></small>
       <div class="hidden name"><code>introducing-urbnmapr.Rmd</code></div>
@@ -105,100 +105,100 @@
 <a href="#getting-data" class="anchor"></a>Getting data</h2>
 <p>There are two methods for accessing map data in <code>urbnmapr</code>. First, <code>urbnmapr</code> contains two <code>tibble</code> data frames, <code>states</code> and <code>counties</code>, for easily accessing simple state and county map data.</p>
 <p>The <code>states</code> and <code>counties</code> tibbles can be used with <code>geom_polygon()</code> and <code>coord_map()</code> to create base maps of the continental United States, with Alaska and Hawaii displayed as insets:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tidyverse)</a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(urbnmapr)</a>
-<a class="sourceLine" id="cb1-3" title="3"></a>
-<a class="sourceLine" id="cb1-4" title="4">states <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1-5" title="5"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(long, lat, <span class="dt">group =</span> group)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb1-6" title="6"><span class="st">    </span><span class="kw">geom_polygon</span>(<span class="dt">fill =</span> <span class="st">"grey"</span>, <span class="dt">color =</span> <span class="st">"#ffffff"</span>, <span class="dt">size =</span> <span class="fl">0.25</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb1-7" title="7"><span class="st">    </span><span class="kw">coord_map</span>(<span class="dt">projection =</span> <span class="st">"albers"</span>, <span class="dt">lat0 =</span> <span class="dv">39</span>, <span class="dt">lat1 =</span> <span class="dv">45</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tidyverse)
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(urbnmapr)
+
+states <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(long, lat, <span class="dt">group =</span> group)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_polygon</span>(<span class="dt">fill =</span> <span class="st">"grey"</span>, <span class="dt">color =</span> <span class="st">"#ffffff"</span>, <span class="dt">size =</span> <span class="fl">0.25</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">coord_map</span>(<span class="dt">projection =</span> <span class="st">"albers"</span>, <span class="dt">lat0 =</span> <span class="dv">39</span>, <span class="dt">lat1 =</span> <span class="dv">45</span>)</code></pre></div>
 <p><img src="introducing-urbnmapr_files/figure-html/blank-states-1.png" width="700"></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">counties <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(long, lat, <span class="dt">group =</span> group)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb2-3" title="3"><span class="st">    </span><span class="kw">geom_polygon</span>(<span class="dt">fill =</span> <span class="st">"grey"</span>, <span class="dt">color =</span> <span class="st">"#ffffff"</span>, <span class="dt">size =</span> <span class="fl">0.05</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb2-4" title="4"><span class="st">    </span><span class="kw">coord_map</span>(<span class="dt">projection =</span> <span class="st">"albers"</span>, <span class="dt">lat0 =</span> <span class="dv">39</span>, <span class="dt">lat1 =</span> <span class="dv">45</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">counties <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(long, lat, <span class="dt">group =</span> group)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_polygon</span>(<span class="dt">fill =</span> <span class="st">"grey"</span>, <span class="dt">color =</span> <span class="st">"#ffffff"</span>, <span class="dt">size =</span> <span class="fl">0.05</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">coord_map</span>(<span class="dt">projection =</span> <span class="st">"albers"</span>, <span class="dt">lat0 =</span> <span class="dv">39</span>, <span class="dt">lat1 =</span> <span class="dv">45</span>)</code></pre></div>
 <p><img src="introducing-urbnmapr_files/figure-html/blank-counties-1.png" width="700"></p>
 <p>Second, the function <code><a href="../reference/get_urbn_map.html">get_urbn_map()</a></code> accesses additional maps including “ccdf”, which includes elided territories roughly positioned in the direction of their true location, and “territories_counties”, which includes territories below the continuous 48 states.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">ccdf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_urbn_map.html">get_urbn_map</a></span>(<span class="dt">map =</span> <span class="st">"territories_counties"</span>)</a>
-<a class="sourceLine" id="cb3-2" title="2"></a>
-<a class="sourceLine" id="cb3-3" title="3">ccdf <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb3-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(long, lat, <span class="dt">group =</span> group)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb3-5" title="5"><span class="st">    </span><span class="kw">geom_polygon</span>(<span class="dt">fill =</span> <span class="st">"grey"</span>, <span class="dt">color =</span> <span class="st">"#ffffff"</span>, <span class="dt">size =</span> <span class="fl">0.25</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb3-6" title="6"><span class="st">    </span><span class="kw">scale_x_continuous</span>(<span class="dt">limits =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="op">-</span><span class="dv">141</span>, <span class="dv">-55</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb3-7" title="7"><span class="st">    </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">24</span>, <span class="dv">50</span>)) <span class="op">+</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb3-8" title="8"><span class="st">    </span><span class="kw">coord_map</span>(<span class="dt">projection =</span> <span class="st">"albers"</span>, <span class="dt">lat0 =</span> <span class="dv">39</span>, <span class="dt">lat1 =</span> <span class="dv">45</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ccdf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_urbn_map.html">get_urbn_map</a></span>(<span class="dt">map =</span> <span class="st">"territories_counties"</span>)
+
+ccdf <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(long, lat, <span class="dt">group =</span> group)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_polygon</span>(<span class="dt">fill =</span> <span class="st">"grey"</span>, <span class="dt">color =</span> <span class="st">"#ffffff"</span>, <span class="dt">size =</span> <span class="fl">0.25</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">scale_x_continuous</span>(<span class="dt">limits =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="op">-</span><span class="dv">141</span>, <span class="op">-</span><span class="dv">55</span>)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">24</span>, <span class="dv">50</span>)) <span class="op">+</span><span class="st">  </span>
+<span class="st">    </span><span class="kw">coord_map</span>(<span class="dt">projection =</span> <span class="st">"albers"</span>, <span class="dt">lat0 =</span> <span class="dv">39</span>, <span class="dt">lat1 =</span> <span class="dv">45</span>)</code></pre></div>
 <p><img src="introducing-urbnmapr_files/figure-html/blank-territories-counties-1.png" width="700"></p>
 </div>
 <div id="merging-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#merging-data" class="anchor"></a>Merging data</h2>
 <p>All tibbles include various identifiers to simplify merging data. The states <code>states</code> tibble contains <code>state_fips</code>, <code>state_abbv</code>, and <code>state_name</code>. The <code>counties</code> tibble contains <code>county_fips</code>, <code>state_abbv</code>, <code>state_fips</code>, <code>county_name</code>, and <code>state_name</code>. Both tibbles can be piped into <code>ggplot2</code> to create a choropleth map.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">statedata <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb4-2" title="2"><span class="st">  </span><span class="kw">left_join</span>(states, <span class="dt">by =</span> <span class="st">"state_name"</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb4-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(long, lat, <span class="dt">group =</span> group, <span class="dt">fill =</span> horate)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb4-4" title="4"><span class="st">  </span><span class="kw">geom_polygon</span>(<span class="dt">color =</span> <span class="st">"#ffffff"</span>, <span class="dt">size =</span> <span class="fl">0.25</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb4-5" title="5"><span class="st">  </span><span class="kw">coord_map</span>(<span class="dt">projection =</span> <span class="st">"albers"</span>, <span class="dt">lat0 =</span> <span class="dv">39</span>, <span class="dt">lat1 =</span> <span class="dv">45</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb4-6" title="6"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">fill =</span> <span class="st">"Homeownership rate"</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">statedata <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">left_join</span>(states, <span class="dt">by =</span> <span class="st">"state_name"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(long, lat, <span class="dt">group =</span> group, <span class="dt">fill =</span> horate)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_polygon</span>(<span class="dt">color =</span> <span class="st">"#ffffff"</span>, <span class="dt">size =</span> <span class="fl">0.25</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_map</span>(<span class="dt">projection =</span> <span class="st">"albers"</span>, <span class="dt">lat0 =</span> <span class="dv">39</span>, <span class="dt">lat1 =</span> <span class="dv">45</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">fill =</span> <span class="st">"Homeownership rate"</span>)</code></pre></div>
 <p><img src="introducing-urbnmapr_files/figure-html/us-choropleth-1.png" width="700"></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">household_data &lt;-<span class="st"> </span><span class="kw">left_join</span>(countydata, counties, <span class="dt">by =</span> <span class="st">"county_fips"</span>) </a>
-<a class="sourceLine" id="cb5-2" title="2"></a>
-<a class="sourceLine" id="cb5-3" title="3">household_data <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb5-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(long, lat, <span class="dt">group =</span> group, <span class="dt">fill =</span> medhhincome)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb5-5" title="5"><span class="st">    </span><span class="kw">geom_polygon</span>(<span class="dt">color =</span> <span class="st">"#ffffff"</span>, <span class="dt">size =</span> <span class="fl">0.05</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb5-6" title="6"><span class="st">    </span><span class="kw">coord_map</span>(<span class="dt">projection =</span> <span class="st">"albers"</span>, <span class="dt">lat0 =</span> <span class="dv">39</span>, <span class="dt">lat1 =</span> <span class="dv">45</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">household_data &lt;-<span class="st"> </span><span class="kw">left_join</span>(countydata, counties, <span class="dt">by =</span> <span class="st">"county_fips"</span>) 
+
+household_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(long, lat, <span class="dt">group =</span> group, <span class="dt">fill =</span> medhhincome)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_polygon</span>(<span class="dt">color =</span> <span class="st">"#ffffff"</span>, <span class="dt">size =</span> <span class="fl">0.05</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">coord_map</span>(<span class="dt">projection =</span> <span class="st">"albers"</span>, <span class="dt">lat0 =</span> <span class="dv">39</span>, <span class="dt">lat1 =</span> <span class="dv">45</span>)</code></pre></div>
 <p><img src="introducing-urbnmapr_files/figure-html/county-1.png" width="700"></p>
 </div>
 <div id="labels" class="section level2">
 <h2 class="hasAnchor">
 <a href="#labels" class="anchor"></a>Labels</h2>
 <p>The function <code><a href="../reference/get_urbn_labels.html">get_urbn_labels()</a></code> accesses additional labels including “ccdf”, which includes elided territories roughly positioned in the direction of their true location, and “territories_counties”, which includes territories below the continuous 48 states.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tidyverse)</a>
-<a class="sourceLine" id="cb6-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(urbnmapr)</a>
-<a class="sourceLine" id="cb6-3" title="3"></a>
-<a class="sourceLine" id="cb6-4" title="4">ccdf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_urbn_map.html">get_urbn_map</a></span>(<span class="dt">map =</span> <span class="st">"ccdf"</span>)</a>
-<a class="sourceLine" id="cb6-5" title="5">ccdf_labels &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_urbn_labels.html">get_urbn_labels</a></span>(<span class="dt">map =</span> <span class="st">"ccdf"</span>)</a>
-<a class="sourceLine" id="cb6-6" title="6"></a>
-<a class="sourceLine" id="cb6-7" title="7">ccdf <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb6-8" title="8"><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb6-9" title="9"><span class="st">    </span><span class="kw">geom_polygon</span>(<span class="kw">aes</span>(long, lat, <span class="dt">group =</span> group), </a>
-<a class="sourceLine" id="cb6-10" title="10">                 <span class="dt">fill =</span> <span class="st">"grey"</span>, <span class="dt">color =</span> <span class="st">"#ffffff"</span>, <span class="dt">size =</span> <span class="fl">0.25</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb6-11" title="11"><span class="st">    </span><span class="kw">geom_text</span>(<span class="dt">data =</span> ccdf_labels, <span class="kw">aes</span>(long, lat, <span class="dt">label =</span> state_abbv), <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb6-12" title="12"><span class="st">    </span><span class="kw">scale_x_continuous</span>(<span class="dt">limits =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="op">-</span><span class="dv">141</span>, <span class="dv">-55</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb6-13" title="13"><span class="st">    </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">24</span>, <span class="dv">50</span>)) <span class="op">+</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb6-14" title="14"><span class="st">    </span><span class="kw">coord_map</span>(<span class="dt">projection =</span> <span class="st">"albers"</span>, <span class="dt">lat0 =</span> <span class="dv">39</span>, <span class="dt">lat1 =</span> <span class="dv">45</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tidyverse)
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(urbnmapr)
+
+ccdf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_urbn_map.html">get_urbn_map</a></span>(<span class="dt">map =</span> <span class="st">"ccdf"</span>)
+ccdf_labels &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_urbn_labels.html">get_urbn_labels</a></span>(<span class="dt">map =</span> <span class="st">"ccdf"</span>)
+
+ccdf <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_polygon</span>(<span class="kw">aes</span>(long, lat, <span class="dt">group =</span> group), 
+                 <span class="dt">fill =</span> <span class="st">"grey"</span>, <span class="dt">color =</span> <span class="st">"#ffffff"</span>, <span class="dt">size =</span> <span class="fl">0.25</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_text</span>(<span class="dt">data =</span> ccdf_labels, <span class="kw">aes</span>(long, lat, <span class="dt">label =</span> state_abbv), <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span><span class="st">  </span>
+<span class="st">    </span><span class="kw">scale_x_continuous</span>(<span class="dt">limits =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="op">-</span><span class="dv">141</span>, <span class="op">-</span><span class="dv">55</span>)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">24</span>, <span class="dv">50</span>)) <span class="op">+</span><span class="st">  </span>
+<span class="st">    </span><span class="kw">coord_map</span>(<span class="dt">projection =</span> <span class="st">"albers"</span>, <span class="dt">lat0 =</span> <span class="dv">39</span>, <span class="dt">lat1 =</span> <span class="dv">45</span>)</code></pre></div>
 <p><img src="introducing-urbnmapr_files/figure-html/blank-ccdf-labels-1.png" width="700"></p>
 </div>
 <div id="styles" class="section level2">
 <h2 class="hasAnchor">
 <a href="#styles" class="anchor"></a>Styles</h2>
 <p><code><a href="https://www.rdocumentation.org/packages/base/topics/library">library(urbnmapr)</a></code> works well with the <a href="https://github.com/UI-Research/urbnthemes">library(urbnthemes)</a></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(urbnthemes)</a>
-<a class="sourceLine" id="cb7-2" title="2"></a>
-<a class="sourceLine" id="cb7-3" title="3"><span class="kw">set_urbn_defaults</span>(<span class="dt">style =</span> <span class="st">"map"</span>)</a>
-<a class="sourceLine" id="cb7-4" title="4"></a>
-<a class="sourceLine" id="cb7-5" title="5">statedata <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb7-6" title="6"><span class="st">  </span><span class="kw">left_join</span>(states, <span class="dt">by =</span> <span class="st">"state_name"</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb7-7" title="7"><span class="st">  </span><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(long, lat, <span class="dt">group =</span> group, <span class="dt">fill =</span> horate)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb7-8" title="8"><span class="st">  </span><span class="kw">geom_polygon</span>(<span class="dt">color =</span> <span class="st">"#ffffff"</span>, <span class="dt">size =</span> <span class="fl">0.25</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb7-9" title="9"><span class="st">  </span><span class="kw">coord_map</span>(<span class="dt">projection =</span> <span class="st">"albers"</span>, <span class="dt">lat0 =</span> <span class="dv">39</span>, <span class="dt">lat1 =</span> <span class="dv">45</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb7-10" title="10"><span class="st">  </span><span class="kw">scale_fill_gradientn</span>(<span class="dt">labels =</span> scales<span class="op">::</span>percent) <span class="op">+</span></a>
-<a class="sourceLine" id="cb7-11" title="11"><span class="st">   </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"right"</span>,</a>
-<a class="sourceLine" id="cb7-12" title="12">         <span class="dt">legend.direction =</span> <span class="st">"vertical"</span>,</a>
-<a class="sourceLine" id="cb7-13" title="13">         <span class="dt">legend.title =</span> <span class="kw">element_text</span>(<span class="dt">face =</span> <span class="st">"bold"</span>, <span class="dt">size =</span> <span class="dv">11</span>),</a>
-<a class="sourceLine" id="cb7-14" title="14">         <span class="dt">legend.key.height =</span> <span class="kw">unit</span>(.<span class="dv">2</span>, <span class="st">"in"</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb7-15" title="15"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">fill =</span> <span class="st">"Homeownership rate"</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(urbnthemes)
+
+<span class="kw"><a href="https://www.rdocumentation.org/packages/urbnthemes/topics/set_urbn_defaults">set_urbn_defaults</a></span>(<span class="dt">style =</span> <span class="st">"map"</span>)
+
+statedata <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">left_join</span>(states, <span class="dt">by =</span> <span class="st">"state_name"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(long, lat, <span class="dt">group =</span> group, <span class="dt">fill =</span> horate)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_polygon</span>(<span class="dt">color =</span> <span class="st">"#ffffff"</span>, <span class="dt">size =</span> <span class="fl">0.25</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_map</span>(<span class="dt">projection =</span> <span class="st">"albers"</span>, <span class="dt">lat0 =</span> <span class="dv">39</span>, <span class="dt">lat1 =</span> <span class="dv">45</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/urbnthemes/topics/scale_fill_gradientn">scale_fill_gradientn</a></span>(<span class="dt">labels =</span> scales<span class="op">::</span>percent) <span class="op">+</span>
+<span class="st">   </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"right"</span>,
+         <span class="dt">legend.direction =</span> <span class="st">"vertical"</span>,
+         <span class="dt">legend.title =</span> <span class="kw">element_text</span>(<span class="dt">face =</span> <span class="st">"bold"</span>, <span class="dt">size =</span> <span class="dv">11</span>),
+         <span class="dt">legend.key.height =</span> <span class="kw">unit</span>(.<span class="dv">2</span>, <span class="st">"in"</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">fill =</span> <span class="st">"Homeownership rate"</span>)</code></pre></div>
 <p><img src="introducing-urbnmapr_files/figure-html/theme-state-1.png" width="700"></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">household_data <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb8-2" title="2"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/filter">filter</a></span>(state_name <span class="op">%in%</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"Virginia"</span>, <span class="st">"Maryland"</span>, <span class="st">"District of Columbia"</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb8-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(long, lat, <span class="dt">group =</span> group, <span class="dt">fill =</span> medhhincome)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb8-4" title="4"><span class="st">    </span><span class="kw">geom_polygon</span>(<span class="dt">color =</span> <span class="st">"#ffffff"</span>, <span class="dt">size =</span> <span class="fl">0.05</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb8-5" title="5"><span class="st">    </span><span class="kw">coord_map</span>(<span class="dt">projection =</span> <span class="st">"albers"</span>, <span class="dt">lat0 =</span> <span class="dv">39</span>, <span class="dt">lat1 =</span> <span class="dv">45</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb8-6" title="6"><span class="st">    </span><span class="kw">scale_fill_gradientn</span>(<span class="dt">labels =</span> scales<span class="op">::</span>dollar) <span class="op">+</span></a>
-<a class="sourceLine" id="cb8-7" title="7"><span class="st">    </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"right"</span>,</a>
-<a class="sourceLine" id="cb8-8" title="8">          <span class="dt">legend.direction =</span> <span class="st">"vertical"</span>,</a>
-<a class="sourceLine" id="cb8-9" title="9">          <span class="dt">legend.title =</span> <span class="kw">element_text</span>(<span class="dt">face =</span> <span class="st">"bold"</span>, <span class="dt">size =</span> <span class="dv">11</span>),</a>
-<a class="sourceLine" id="cb8-10" title="10">          <span class="dt">legend.key.height =</span> <span class="kw">unit</span>(.<span class="dv">25</span>, <span class="st">"in"</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb8-11" title="11"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">fill =</span> <span class="st">"Median household income"</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">household_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/filter">filter</a></span>(state_name <span class="op">%in%</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"Virginia"</span>, <span class="st">"Maryland"</span>, <span class="st">"District of Columbia"</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(long, lat, <span class="dt">group =</span> group, <span class="dt">fill =</span> medhhincome)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_polygon</span>(<span class="dt">color =</span> <span class="st">"#ffffff"</span>, <span class="dt">size =</span> <span class="fl">0.05</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">coord_map</span>(<span class="dt">projection =</span> <span class="st">"albers"</span>, <span class="dt">lat0 =</span> <span class="dv">39</span>, <span class="dt">lat1 =</span> <span class="dv">45</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw"><a href="https://www.rdocumentation.org/packages/urbnthemes/topics/scale_fill_gradientn">scale_fill_gradientn</a></span>(<span class="dt">labels =</span> scales<span class="op">::</span>dollar) <span class="op">+</span>
+<span class="st">    </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"right"</span>,
+          <span class="dt">legend.direction =</span> <span class="st">"vertical"</span>,
+          <span class="dt">legend.title =</span> <span class="kw">element_text</span>(<span class="dt">face =</span> <span class="st">"bold"</span>, <span class="dt">size =</span> <span class="dv">11</span>),
+          <span class="dt">legend.key.height =</span> <span class="kw">unit</span>(.<span class="dv">25</span>, <span class="st">"in"</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">fill =</span> <span class="st">"Median household income"</span>)</code></pre></div>
 <p><img src="introducing-urbnmapr_files/figure-html/theme-counties-1.png" width="700"></p>
 </div>
   </div>
