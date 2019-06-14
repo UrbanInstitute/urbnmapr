@@ -1,6 +1,6 @@
 Package: urbnmapr
 Type: Package
-Title: State and county shapefiles in tibble format
+Title: State and county shapefiles in sf and tibble format
 Version: 0.0.0.9002
 Authors@R: c(
     person('Sarah', 'Strochak', email = 'sstrochak@urban.org', role = c('aut', 'cre')),
@@ -10,7 +10,7 @@ Authors@R: c(
     person('William', 'Murphy', role = c('ctb', 'cph'), comment = 'Original author for copied and derived code for fiftystater'),
     person('Barry', 'Rowlingson', role = 'ctb', comment = 'Original author for copied and derived code for fiftystater')
     )
-Description: Provides state and county shapefiles in 'tibble' format that is 
+Description: Provides state and county shapefiles in 'sf' and 'tibble' format that is 
     compatible to map with 'ggplot2'. Shapefiles include Alaska and Hawaii, 
     transformed to be displayed as insets within the continental United States.
     Heavily inspired by and derived in part from the fiftystater 
@@ -19,7 +19,8 @@ Depends:
     R (>= 3.4.0)
 Imports:
     tibble,
-    mapproj
+    mapproj,
+    sf
 Suggests:
     tidyverse,
     urbnthemes,
