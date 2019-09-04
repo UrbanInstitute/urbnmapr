@@ -1,28 +1,36 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-urbnmapr <a href="https://urbaninstitute.github.io/urbnmapr/"><img src="man/figures/hexsticker.png" align="right" height="160"/></a>
-====================================================================================================================================
 
-[![Travis-CI Build Status](https://travis-ci.org/UrbanInstitute/urbnmapr.svg?branch=master)](https://travis-ci.org/UrbanInstitute/urbnmapr)
+# urbnmapr <a href="https://urbaninstitute.github.io/urbnmapr/"><img src="man/figures/hexsticker.png" align="right" height="160"/></a>
 
-The `urbnmapr` package provides state and county shapefiles that are compatible to map with `ggplot2`.
+[![Travis-CI Build
+Status](https://travis-ci.org/UrbanInstitute/urbnmapr.svg?branch=master)](https://travis-ci.org/UrbanInstitute/urbnmapr)
 
-Shapefiles include Alaska and Hawaii, transformed to be displayed as insets within the continental United States. There are options to include the territories for both the state and county maps.
+The `urbnmapr` package provides state and county shapefiles that are
+compatible to map with `ggplot2`.
 
-This package is heavily inspired by and derived in part from the [fiftystater package](https://cran.r-project.org/package=fiftystater) by William Murphy. In contrast, `urbnmapr`:
+Shapefiles include Alaska and Hawaii, transformed to be displayed as
+insets within the continental United States. There are options to
+include the territories for both the state and county maps.
 
--   Uses shapefiles from the US Census Bureau
--   Converts the shapefile data to `sf` format
--   Adds various identifiers for merging
--   Includes a county-level shapefile and options to add territories
+This package is heavily inspired by and derived in part from the
+[fiftystater package](https://cran.r-project.org/package=fiftystater) by
+William Murphy. In contrast, `urbnmapr`:
 
-Stay up-to-date
----------------
+  - Uses shapefiles from the US Census Bureau
+  - Converts the shapefile data to `sf` format
+  - Adds various identifiers for merging
+  - Includes a county-level shapefile and options to add territories
 
-Sign up [here](https://app.smartsheet.com/b/form/9029a0a8254e4044a52cdebaebe343bf) to stay up-to-date with R package releases and R resources from the Urban Institute. We will not share your information and we will not email more than once per month.
+## Stay up-to-date
 
-Installation
-------------
+Sign up
+[here](https://app.smartsheet.com/b/form/9029a0a8254e4044a52cdebaebe343bf)
+to stay up-to-date with R package releases and R resources from the
+Urban Institute. We will not share your information and we will not
+email more than once per month.
+
+## Installation
 
 You can install the latest version of `urbnmapr` from GitHub:
 
@@ -31,12 +39,14 @@ You can install the latest version of `urbnmapr` from GitHub:
 devtools::install_github("UrbanInstitute/urbnmapr")
 ```
 
-Usage
------
+## Usage
 
 ### Quick maps
 
-The `get_urbn_map()` function can be used to call shapefiles. Using the `sf = TRUE` option will load `sf` objects. These can be used with `geom_sf()` to create base maps of the continental United States, with Alaska and Hawaii displayed as insets:
+The `get_urbn_map()` function can be used to call shapefiles. Using the
+`sf = TRUE` option will load `sf` objects. These can be used with
+`geom_sf()` to create base maps of the continental United States, with
+Alaska and Hawaii displayed as insets:
 
 ``` r
 library(tidyverse)
@@ -49,7 +59,7 @@ states_sf %>%
   geom_sf(fill = "grey", color = "#ffffff")
 ```
 
-![](README_files/figure-markdown_github/sf-state-1.png)
+![](README_files/figure-gfm/sf-state-1.png)<!-- -->
 
 ``` r
 library(tidyverse)
@@ -62,13 +72,14 @@ counties_sf %>%
   geom_sf(fill = "grey", color = "#ffffff")
 ```
 
-![](README_files/figure-markdown_github/sf-county-1.png)
+![](README_files/figure-gfm/sf-county-1.png)<!-- -->
 
 The default projection is US National Atlas Equal Area.
 
 ### More maps
 
-Maps with US territories can also be called with `get_urbn_map()`.
+Maps with US territories can also be called with
+`get_urbn_map()`.
 
 ``` r
 territories_counties <- get_urbn_map(map = "territories_counties", sf = TRUE)
@@ -79,11 +90,14 @@ ggplot() +
           fill = "grey", color = "#ffffff")
 ```
 
-![](README_files/figure-markdown_github/terr-1.png)
+![](README_files/figure-gfm/terr-1.png)<!-- -->
 
 ### Labels
 
-Labels for states maps can be accessed with `get_urbn_labels()`. Only state labels are custom, so they can be displayed next to smaller states. Use the function to call the appropriate labels and then label the map with `geom_sf_text()`.
+Labels for states maps can be accessed with `get_urbn_labels()`. Only
+state labels are custom, so they can be displayed next to smaller
+states. Use the function to call the appropriate labels and then label
+the map with `geom_sf_text()`.
 
 ``` r
 states_sf <- get_urbn_map(map = "states", sf = TRUE)
@@ -97,18 +111,21 @@ states_sf %>%
             size = 3)
 ```
 
-![](README_files/figure-markdown_github/quick-labels-1.png)
+![](README_files/figure-gfm/quick-labels-1.png)<!-- -->
 
-Merging Data
-------------
+## Merging Data
 
-The states and counties spatial data include various identifiers to simplify merging data. The states `states` tibble contains `state_fips`, `state_abbv`, and `state_name`. The `counties` tibble contains `county_fips`, `state_abbv`, `state_fips`, `county_name`, and `state_name`.
+The states and counties spatial data include various identifiers to
+simplify merging data. The states `states` tibble contains `state_fips`,
+`state_abbv`, and `state_name`. The `counties` tibble contains
+`county_fips`, `state_abbv`, `state_fips`, `county_name`, and
+`state_name`.
 
 Continuous data can be mapping on a color scale.
 
 ``` r
-spatial_data <- left_join(statedata,
-                          get_urbn_map(map = "states", sf = TRUE),
+spatial_data <- left_join(get_urbn_map(map = "states", sf = TRUE),
+                          statedata,
                           by = "state_name")
 
 ggplot() +
@@ -118,7 +135,7 @@ ggplot() +
   labs(fill = "Homeownership rate")
 ```
 
-![](README_files/figure-markdown_github/us-choropleth-1.png)
+![](README_files/figure-gfm/us-choropleth-1.png)<!-- -->
 
 Categorical data can be mapped on a discrete color scale.
 
@@ -128,7 +145,7 @@ county_groups <- countydata %>%
   mutate(cat_var = paste0("Group ",
                           sample(1:4, nrow(countydata), replace = TRUE)))
 
-household_data <- left_join(county_groups, counties_sf, by = "county_fips")
+household_data <- left_join(counties_sf, county_groups, by = "county_fips")
 
 household_data %>%
   ggplot() +
@@ -137,12 +154,12 @@ household_data %>%
   labs(fill = "Categorical variable")
 ```
 
-![](README_files/figure-markdown_github/county-1.png)
+![](README_files/figure-gfm/county-1.png)<!-- -->
 
-Styles
-------
+## Styles
 
-`library(urbnmapr)` works well with the [Urban Institute `ggplot2` theme.](https://github.com/UrbanInstitute/urban_R_theme)
+`library(urbnmapr)` works well with
+[\`library(urbnthemes)](https://github.com/UrbanInstitute/urbnthemes)
 
 ``` r
 library(urbnthemes)
@@ -150,11 +167,15 @@ library(urbnthemes)
 set_urbn_defaults(style = "map")
 ```
 
+    ## Warning: New theme missing the following elements: axis.ticks.length.x,
+    ## axis.ticks.length.x.top, axis.ticks.length.x.bottom, axis.ticks.length.y,
+    ## axis.ticks.length.y.left, axis.ticks.length.y.right
+
 ``` r
 states_sf <- get_urbn_map(map = "states", sf = TRUE)
 
-statedata %>% 
-  left_join(states_sf, by = "state_name") %>% 
+states_sf %>% 
+  left_join(statedata, by = "state_name") %>% 
   ggplot() +
   geom_sf(mapping = aes(fill = horate),
           color = "#ffffff", size = 0.25) +
@@ -163,9 +184,10 @@ statedata %>%
   coord_sf(datum = NA)
 ```
 
-![](README_files/figure-markdown_github/theme-state-1.png)
+![](README_files/figure-gfm/theme-state-1.png)<!-- -->
 
-Map smaller geographies with `filter()`. You may need to reproject the data based on which areas you are mapping.
+Map smaller geographies with `filter()`. You may need to reproject the
+data based on which areas you are mapping.
 
 ``` r
 household_data %>%
@@ -178,15 +200,16 @@ household_data %>%
   labs(fill = "Median household income")
 ```
 
-![](README_files/figure-markdown_github/theme-counties-1.png)
+![](README_files/figure-gfm/theme-counties-1.png)<!-- -->
 
 A discrete color scale can also be used for categorical data.
 
 ``` r
-state_categorical <- statedata %>% 
+state_categorical <- left_join(get_urbn_map(map = "states", sf = TRUE),
+                               statedata,
+                               by = "state_name") %>% 
   mutate(cat_var = paste0("Group ",
-                          sample(1:4, nrow(statedata), replace = TRUE))) %>% 
-  left_join(get_urbn_map(map = "states", sf = TRUE), by = "state_name")
+                          sample(1:4, nrow(statedata), replace = TRUE)))
 
 
 ggplot() +
@@ -197,14 +220,14 @@ ggplot() +
   labs(fill = "Categorical variable")
 ```
 
-![](README_files/figure-markdown_github/state-discrete-1.png)
+![](README_files/figure-gfm/state-discrete-1.png)<!-- -->
 
-License
--------
+## License
 
 Code released under the GNU General Public License v3.0.
 
-Code of conduct
----------------
+## Code of conduct
 
-Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+Please note that this project is released with a [Contributor Code of
+Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree
+to abide by its terms.
