@@ -139,7 +139,7 @@ household_data %>%
 
 ## Styles
 
-`library(urbnmapr)` works well with the [Urban Institute `ggplot2` theme.](https://github.com/UrbanInstitute/urban_R_theme)
+`library(urbnmapr)` works well with [`library(urbnthemes)](https://github.com/UrbanInstitute/urbnthemes)
 
 ```{r load-theme, message=FALSE}
 library(urbnthemes)
