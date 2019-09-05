@@ -22,5 +22,7 @@ territories_labels_sf <- territories_labels %>%
   sf::st_as_sf(coords = c("long", "lat")) %>%
   # set crs to match states
   sf::st_set_crs(4326) %>%
+  # transform CRS
+  sf::st_transform(crs = 2163) %>%
   # get rid of county variables
   select(-county_name, -fips_class, -county_fips)
