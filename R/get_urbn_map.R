@@ -43,27 +43,23 @@ get_urbn_map <- function(map = "states", sf = FALSE) {
   } else if (sf == TRUE) {
 
     if (map == "states") {
-      states_sf %>%
-        sf::st_as_sf()
+      sf::st_as_sf(states_sf)
     } else if (map == "counties") {
-      counties_sf  %>%
-        sf::st_as_sf()
+      sf::st_as_sf(counties_sf)
     } else if (map == "ccdf") {
       stop("SF option not available for CCDF map")
     } else if (map == "territories_states") {
-      rbind(
+      sf::st_as_sf(rbind(
         states_sf[!states_sf$state_name %in%
                     c("Alaska", "Hawaii"), ],
         territories_sf
-      )  %>%
-        sf::st_as_sf()
+      ))
     } else if (map == "territories_counties") {
-      rbind(
+      sf::st_as_sf(rbind(
         counties_sf[!counties_sf$state_name %in%
                       c("Alaska", "Hawaii"), ],
         territories_counties_sf
-      ) %>%
-        sf::st_as_sf()
+      ))
     } else {
       stop("Invalid 'map' argument. Valid maps are: ",
            "states, counties, ccdf, territories_states, and territories_counties.",
