@@ -107,8 +107,8 @@ Continuous data can be mapping on a color scale.
 
 ```{r us-choropleth}
 
-spatial_data <- left_join(statedata,
-                          get_urbn_map(map = "states", sf = TRUE),
+spatial_data <- left_join(get_urbn_map(map = "states", sf = TRUE),
+                          statedata,
                           by = "state_name")
 
 ggplot() +
@@ -128,7 +128,7 @@ county_groups <- countydata %>%
   mutate(cat_var = paste0("Group ",
                           sample(1:4, nrow(countydata), replace = TRUE)))
 
-household_data <- left_join(county_groups, counties_sf, by = "county_fips")
+household_data <- left_join(counties_sf, county_groups, by = "county_fips")
 
 household_data %>%
   ggplot() +
@@ -139,7 +139,7 @@ household_data %>%
 
 ## Styles
 
-`library(urbnmapr)` works well with the [Urban Institute `ggplot2` theme.](https://github.com/UrbanInstitute/urban_R_theme)
+`library(urbnmapr)` works well with [`library(urbnthemes)](https://github.com/UrbanInstitute/urbnthemes)
 
 ```{r load-theme, message=FALSE}
 library(urbnthemes)
@@ -151,8 +151,8 @@ set_urbn_defaults(style = "map")
 
 states_sf <- get_urbn_map(map = "states", sf = TRUE)
 
-statedata %>% 
-  left_join(states_sf, by = "state_name") %>% 
+states_sf %>% 
+  left_join(statedata, by = "state_name") %>% 
   ggplot() +
   geom_sf(mapping = aes(fill = horate),
           color = "#ffffff", size = 0.25) +
@@ -174,15 +174,17 @@ household_data %>%
     coord_sf(datum = NA) +
     scale_fill_gradientn(labels = scales::dollar) +
   labs(fill = "Median household income")
+
 ```
 
 A discrete color scale can also be used for categorical data.
 
 ```{r state-discrete}
-state_categorical <- statedata %>% 
+state_categorical <- left_join(get_urbn_map(map = "states", sf = TRUE),
+                               statedata,
+                               by = "state_name") %>% 
   mutate(cat_var = paste0("Group ",
-                          sample(1:4, nrow(statedata), replace = TRUE))) %>% 
-  left_join(get_urbn_map(map = "states", sf = TRUE), by = "state_name")
+                          sample(1:4, nrow(statedata), replace = TRUE)))
 
 
 ggplot() +

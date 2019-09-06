@@ -6,8 +6,8 @@ dist: xenial
 cache: packages
 
 r_github_packages:
-  - UI-Research/urbnthemes
-  
+
+  - UrbanInstitute/urbnthemes
 addons:
   apt:
     packages:
