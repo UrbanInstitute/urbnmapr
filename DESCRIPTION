@@ -21,6 +21,7 @@ Imports:
     tibble,
     mapproj,
     sf
+    tigris
 Suggests:
     tidyverse,
     urbnthemes,
